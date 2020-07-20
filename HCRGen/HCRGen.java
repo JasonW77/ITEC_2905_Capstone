@@ -15,12 +15,13 @@ import javafx.geometry.Pos;
 import java.util.*;
 
 
-
-
-
 public class HCRGen extends Application {
 	// Tong's Fire Extinguisher Sales and Service Information
 	String licenceNum = " Lic. # KE82431 & KE113954";
+	/* to be updated at a later date
+	String licNumTech1 = " Lic. # KE82431";
+	String licNumTech2 = " Lic. # KE113954";
+	*/
 	String address1 = " P.O. Box 135 \n Elsinore, UT 84724";
 	String address2 = " P.O. Box 3101 \n Cedar City, UT 84721";
 	String phoneNum = " (435) 201-2182";
@@ -28,7 +29,7 @@ public class HCRGen extends Application {
 	
 	@Override
 	public void start(Stage primaryStage){
-		//Create a grid pane and set its atributes
+		//Create a main grid pane and set its atributes
 		GridPane pane = new GridPane();
 		pane.setMinSize(400, 400);
 		pane.setPadding(new Insets(10,10,10,10));
@@ -37,6 +38,30 @@ public class HCRGen extends Application {
 		pane.setAlignment(Pos.TOP_CENTER);
 		pane.setGridLinesVisible(true);
 		
+		//create top and bottom panes and set thier Attributes
+		GridPane topPane = new GridPane();
+		topPane.setMinSize(400, 400);
+		topPane.setPadding(new Insets(10,10,10,10));
+		topPane.setVgap(5);
+		topPane.setHgap(5);
+		topPane.setAlignment(Pos.TOP_CENTER);
+		topPane.setGridLinesVisible(true);
+		
+		GridPane bottomPane = new GridPane();
+		bottomPane.setMinSize(400, 400);
+		bottomPane.setPadding(new Insets(10,10,10,10));
+		bottomPane.setVgap(5);
+		bottomPane.setHgap(5);
+		bottomPane.setAlignment(Pos.TOP_CENTER);
+		bottomPane.setGridLinesVisible(true);
+		
+		/*
+		Items that go in the top Grid are here
+		*/
+		
+		//create ImageView for logo and place in the grid
+	
+		//create address box for Tong's Fire Extinguisher Sales and Service
 		Label tongAdr1 = new Label(address1);
 		Label tongAdr2 = new Label(address2);
 		Label tongPhone = new Label(phoneNum);
@@ -44,27 +69,22 @@ public class HCRGen extends Application {
 		Label tongAdr5 = new Label("P.O. Box 135");
 		Label tongLicNum = new Label(licenceNum);
 		Label invRefNum = new Label(" Invoice Reference #");
-	
-		HBox secondHBox = new HBox();
-		HBox thirdHBox = new HBox();
-		
-		//Create Address VBox for client information
-		VBox vb = new VBox();
-		vb.getChildren().addAll(tongAdr1,tongAdr2, tongPhone, tongLicNum);
-		pane.add(vb, 1,0);
-		
-		/*
-		//create ImageView for logo and place in the grid
-		
-		
-		pane.add(image, 0,0);
-		*/
 		
 		//Create Invoice HBox and place it in the pane
 		HBox invHBox = new HBox();
 		TextField tfInvoice = new TextField();
 		invHBox.getChildren().addAll(invRefNum, tfInvoice);
-		pane.add(invHBox, 2,0);
+		
+		//Create Address VBox for Tong's Fire Extinguisher Sales and Serviceinformation
+		VBox vb = new VBox();
+		vb.getChildren().addAll(tongAdr1,tongAdr2, tongPhone, tongLicNum);
+		
+
+		
+		//place boxes in the top pane
+		//topPane.add(image, 0,0);		
+		topPane.add(vb, 1,0);
+		topPane.add(invHBox, 2,0);
 		
 		//Create Second row of boxes for Customer information and place them on the grid
 		String custPhone = "";
@@ -105,6 +125,9 @@ public class HCRGen extends Application {
 		pane.add(custGrid, 2,1);
 		
 		//Create the cleaning notice and place it in the grid
+		Label clNoLabel = new Label("All cleaning is in accordance with the local fire codes and/or NFPA Standard Code #96. This courtesy follow-up report is provided as a free customer service only; it is not a paid consultation. The inspection of the exhaust system is limited to the possible need for improved access and cleaning only. Other deficiencies, wether reported or not, are beyond the scope of our cleaning crew's knowledge. it is the owner of the exhaust system's responsibility to take appropriate action to modify any deficiencies noted herein or elsewhere.");
+		
+		//pane.add(clNoLabel,1,2);
 		
 		//Create the kitchen cleaning service report boxes and place them in the grid
 
@@ -229,7 +252,7 @@ public class HCRGen extends Application {
 		cIBGrid.add(gBUFirb2,2,14);
 		cIBGrid.add(gBUFirb3,3,14);
 			
-		pane.add(cIBGrid, 1,2);
+		pane.add(cIBGrid, 1,3);
 		
 		//Check Out Box
 		Label checkOutLabel = new Label("Check Out: ");
@@ -341,9 +364,6 @@ public class HCRGen extends Application {
 		Button btFinish = new Button("Submit");
 		
 		Scene scene = new Scene(pane , 500, 500);
-		
-		pane.add(secondHBox, 1,1);
-		pane.add(thirdHBox, 1,2);
 		
 		primaryStage.setTitle("HCRGen");
 		primaryStage.setScene(scene);
