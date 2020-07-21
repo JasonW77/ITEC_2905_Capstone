@@ -7,21 +7,22 @@ import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import java.util.*;
+import javax.swing.*;
 
 
 public class HCRGen extends Application {
 	// Tong's Fire Extinguisher Sales and Service Information
-	String licenceNum = " Lic. # KE82431 & KE113954";
-	/* to be updated at a later date
+	//String licenceNum = " Lic. # KE82431 & KE113954";
 	String licNumTech1 = " Lic. # KE82431";
 	String licNumTech2 = " Lic. # KE113954";
-	*/
 	String address1 = " P.O. Box 135 \n Elsinore, UT 84724";
 	String address2 = " P.O. Box 3101 \n Cedar City, UT 84721";
 	String phoneNum = " (435) 201-2182";
@@ -29,62 +30,124 @@ public class HCRGen extends Application {
 	
 	@Override
 	public void start(Stage primaryStage){
-		//Create a main grid pane and set its atributes
-		GridPane pane = new GridPane();
-		pane.setMinSize(400, 400);
-		pane.setPadding(new Insets(10,10,10,10));
-		pane.setVgap(5);
-		pane.setHgap(5);
-		pane.setAlignment(Pos.TOP_CENTER);
-		pane.setGridLinesVisible(true);
+		//Create a main page VBox and set its atributes
+		VBox mainVB = new VBox();
+		mainVB.setMinSize(400, 400);
+		mainVB.setPadding(new Insets(10,10,10,10));
+		mainVB.setAlignment(Pos.TOP_CENTER);
+
+		//Create the main page HBox, VBox and set thier atributes
+		HBox hb1 = new HBox();
+		hb1.setAlignment(Pos.TOP_CENTER);
+
+		HBox hb2 = new HBox();
+		hb2.setAlignment(Pos.TOP_CENTER);
+		hb2.setPadding(new Insets(10,10,10,10));
+		hb2.setSpacing(10);
+		HBox hb3 = new HBox();
+		hb3.setAlignment(Pos.TOP_CENTER);
+		hb3.setPadding(new Insets(10,10,10,10));
+		hb3.setSpacing(10);
+		HBox hb4 = new HBox();
+		hb4.setAlignment(Pos.TOP_CENTER);
+		hb4.setPadding(new Insets(10,10,10,10));
+		hb4.setSpacing(10);
+		HBox hb5 = new HBox();
+		hb5.setAlignment(Pos.TOP_CENTER);
+		hb5.setPadding(new Insets(10,10,10,10));
+		hb5.setSpacing(10);
+		HBox hb6 = new HBox();
+		hb6.setAlignment(Pos.TOP_CENTER);
+		hb6.setPadding(new Insets(10,10,10,10));
+		hb6.setSpacing(10);
 		
-		//create top and bottom panes and set thier Attributes
-		GridPane topPane = new GridPane();
-		topPane.setMinSize(400, 400);
-		topPane.setPadding(new Insets(10,10,10,10));
-		topPane.setVgap(5);
-		topPane.setHgap(5);
-		topPane.setAlignment(Pos.TOP_CENTER);
-		topPane.setGridLinesVisible(true);
-		
-		GridPane bottomPane = new GridPane();
-		bottomPane.setMinSize(400, 400);
-		bottomPane.setPadding(new Insets(10,10,10,10));
-		bottomPane.setVgap(5);
-		bottomPane.setHgap(5);
-		bottomPane.setAlignment(Pos.TOP_CENTER);
-		bottomPane.setGridLinesVisible(true);
+		VBox vb1 = new VBox();
+		VBox vb2 = new VBox();
+		VBox vb3 = new VBox();
+		vb3.setAlignment(Pos.TOP_CENTER);
 		
 		/*
-		Items that go in the top Grid are here
+		Items that go in hb1 go here
+			~ Imageview of logo
+			~ Buiseness Info
+			~ Invoice box
 		*/
+		
+		//create GridPane for the logo, buissness information and invoice Box
+		GridPane headPane = new GridPane();
+		headPane.setMinSize(100, 100);
+		headPane.setPadding(new Insets(10,10,10,10));
+		headPane.setVgap(5);
+		headPane.setHgap(5);
+		headPane.setAlignment(Pos.TOP_CENTER);
+		headPane.setGridLinesVisible(true);
 		
 		//create ImageView for logo and place in the grid
 	
-		//create address box for Tong's Fire Extinguisher Sales and Service
+		//create address box labels for Tong's Fire Extinguisher Sales and Service
 		Label tongAdr1 = new Label(address1);
 		Label tongAdr2 = new Label(address2);
 		Label tongPhone = new Label(phoneNum);
-		Label tongAdr4 = new Label("P.O. Box 135");
-		Label tongAdr5 = new Label("P.O. Box 135");
-		Label tongLicNum = new Label(licenceNum);
-		Label invRefNum = new Label(" Invoice Reference #");
-		
-		//Create Invoice HBox and place it in the pane
-		HBox invHBox = new HBox();
-		TextField tfInvoice = new TextField();
-		invHBox.getChildren().addAll(invRefNum, tfInvoice);
+		Label tongLicNum1 = new Label(licNumTech1);
+		Label tongLicNum2 = new Label(licNumTech2);
 		
 		//Create Address VBox for Tong's Fire Extinguisher Sales and Serviceinformation
-		VBox vb = new VBox();
-		vb.getChildren().addAll(tongAdr1,tongAdr2, tongPhone, tongLicNum);
 		
-
+		vb1.getChildren().addAll(tongAdr1, tongAdr2, tongPhone, tongLicNum1, tongLicNum2);
+		
+		//Create Invoice HBox and place it in the pane
+		VBox invVBox = new VBox();
+		Label invRefNum = new Label(" Invoice Reference #");
+		TextField tfInvoice = new TextField();
+		invVBox.getChildren().addAll(invRefNum, tfInvoice);
 		
 		//place boxes in the top pane
-		//topPane.add(image, 0,0);		
-		topPane.add(vb, 1,0);
-		topPane.add(invHBox, 2,0);
+		//headPane.add(image, 0,0);		
+		headPane.add(vb1, 1,0);
+		headPane.add(invVBox, 2,0);
+		
+		//add completed headPane to hb1
+		hb1.getChildren().addAll(headPane);
+		
+		/*
+		Items that go in hb2 go here
+			~ Service Info Box
+			~ Customer Info Box
+		*/
+		//Create Service Scedule Information box
+		Label servLabel1 = new Label(" Service Scheduled with: ");
+		Label servLabel2 = new Label(" Store Closing Manager: ");
+		Label servLabel3 = new Label(" Date of Service: ");
+		Label servLabel4 = new Label(" Service Every ");
+		Label servLabel5 = new Label(" Time of Service: ");
+		Label servLabel6 = new Label(" Next Service Due: ");
+		Label servLabel8 = new Label(" ");
+		
+		TextField tfServ1 = new TextField();
+		TextField tfServ2 = new TextField();
+		TextField tfServ3 = new TextField();
+		tfServ3.setMaxWidth(75);
+		TextField tfServ4 = new TextField();
+		tfServ4.setMaxWidth(75);
+		TextField tfServ5 = new TextField();
+		tfServ5.setMaxWidth(75);
+		TextField tfServ6 = new TextField();
+		tfServ6.setMaxWidth(75);
+		
+		GridPane servGrid = new GridPane();
+		servGrid.add(servLabel1,0,0);
+		servGrid.add(tfServ1,1,0);
+		servGrid.add(servLabel2,0,1);
+		servGrid.add(tfServ2,1,1);
+		servGrid.add(servLabel3,0,2);
+		servGrid.add(tfServ3,1,2);
+		servGrid.add(servLabel4,2,2);
+		servGrid.add(tfServ4,3,2);
+		servGrid.add(servLabel5,0,3);
+		servGrid.add(tfServ5,1,3);
+		servGrid.add(servLabel6,2,3);
+		servGrid.add(tfServ6,3,3);
+		
 		
 		//Create Second row of boxes for Customer information and place them on the grid
 		String custPhone = "";
@@ -102,11 +165,17 @@ public class HCRGen extends Application {
 		Label custAdrZipLabel = new Label(" Zip: ");
 		
 		TextField tfcustPhone = new TextField();
+		tfcustPhone.setMaxWidth(75);
 		TextField tfcustName = new TextField();
+		tfcustName.setMaxWidth(75);
 		TextField tfcustAdr = new TextField();
+		tfcustAdr.setMaxWidth(75);
 		TextField tfcustAdrCity = new TextField();
+		tfcustAdrCity.setMaxWidth(75);
 		TextField tfcustAdrState = new TextField();
+		tfcustAdrState.setMaxWidth(75);
 		TextField tfcustAdrZip = new TextField();
+		tfcustAdrZip.setMaxWidth(75);
 		
 		GridPane custGrid = new GridPane();
 		custGrid.add(custPhoneLabel,0,0);
@@ -121,16 +190,53 @@ public class HCRGen extends Application {
 		custGrid.add(tfcustAdrState,1,4);
 		custGrid.add(custAdrZipLabel,0,5);
 		custGrid.add(tfcustAdrZip,1,5);
-	
-		pane.add(custGrid, 2,1);
+
+		hb2.getChildren().addAll(servGrid, custGrid);
 		
+		/*
+		Items that go in vb2 go here
+			~ Notes to technitians *servLabel7*
+			~ TextArea *taServ1*
+		*/
+		
+		//Create cleaning notes text rea and label
+		TextArea taServ1 = new TextArea();
+		taServ1.setPrefHeight(50);
+		Label servLabel7 = new Label(" Notes for Cleaning Technicians: ");
+		vb2.getChildren().addAll(servLabel7, taServ1);
+		
+		/*
+		Items that go in hb3 go here
+			~ cleaning notice label *cLNOLabel*
+		*/
 		//Create the cleaning notice and place it in the grid
-		Label clNoLabel = new Label("All cleaning is in accordance with the local fire codes and/or NFPA Standard Code #96. This courtesy follow-up report is provided as a free customer service only; it is not a paid consultation. The inspection of the exhaust system is limited to the possible need for improved access and cleaning only. Other deficiencies, wether reported or not, are beyond the scope of our cleaning crew's knowledge. it is the owner of the exhaust system's responsibility to take appropriate action to modify any deficiencies noted herein or elsewhere.");
+		Label clNoLabel = new Label("All cleaning is in accordance with the local fire codes and/or NFPA Standard Code #96. This courtesy follow-up report \nis provided as a free customer service only; it is not a paid consultation. The inspection of the exhaust system is limited \nto the possible need for improved access and cleaning only. Other deficiencies, wether reported or not, are beyond the \nscope of our cleaning crew's knowledge. it is the owner of the exhaust system's responsibility to take appropriate \naction to modify any deficiencies noted herein or elsewhere.");
+		clNoLabel.setMaxWidth(750);
+		hb3.getChildren().add(clNoLabel);
 		
-		//pane.add(clNoLabel,1,2);
+
+		/*
+		Items that go in vb3 go here
+			~ Kitchen Exhaust Cleaning Service Report Title bar
+			~ Initial service check boxes
+		*/
 		
 		//Create the kitchen cleaning service report boxes and place them in the grid
-
+		Label kECSRLabel = new Label("KITCHEN EXHAUST CLEANING SERVICE REPORT");
+		
+		CheckBox iScb = new CheckBox("INITIAL SERVICE ");
+		CheckBox rScb = new CheckBox("REGULAR SERVICE ");
+		CheckBox iNcb = new CheckBox("INSPECTION ");
+		hb4.getChildren().addAll(iScb, rScb, iNcb);
+		
+		
+		vb3.getChildren().addAll(kECSRLabel, hb4);
+		
+		/*
+		Items that go in hb5 go here
+			~ Check In Box
+			~ Check Out Box
+		*/
 		//Check In Box
 		Label checkInLabel = new Label("Check In: ");
 		Label cIYLabel = new Label("Yes ");
@@ -252,8 +358,6 @@ public class HCRGen extends Application {
 		cIBGrid.add(gBUFirb2,2,14);
 		cIBGrid.add(gBUFirb3,3,14);
 			
-		pane.add(cIBGrid, 1,3);
-		
 		//Check Out Box
 		Label checkOutLabel = new Label("Check Out: ");
 		Label cOYLabel = new Label("Yes");
@@ -356,14 +460,33 @@ public class HCRGen extends Application {
 		cOBGrid.add(photoTrb1,1,13);
 		cOBGrid.add(photoTrb2,2,13);
 		
-		pane.add(cOBGrid, 2,2);
+		hb5.getChildren().addAll(cIBGrid, cOBGrid);
+		
+		/*
+		Items that go in hb6 go here
+			~ Time in Time out boxes 
+		*/
+		Label tILabel = new Label("TIME IN: ");
+		Label tOLabel = new Label("TIME OUT: ");
+		
+		TextField tfTI = new TextField();
+		TextField tfTO = new TextField();
+		
+		hb6.getChildren().addAll(tILabel, tfTI, tOLabel, tfTO);
+		/*
+		Items that go in hb7 go here
+			~ Misc notes text field
+			~ Acknowledgement box
+		*/
+		
+		mainVB.getChildren().addAll(hb1, hb2, vb2, hb3, vb3, hb5, hb6);
 		
 		//Create the misc Notes and Acknowledgment Boxes and place them in the grid
 		
 		
 		Button btFinish = new Button("Submit");
 		
-		Scene scene = new Scene(pane , 500, 500);
+		Scene scene = new Scene(mainVB , 775, 1000);
 		
 		primaryStage.setTitle("HCRGen");
 		primaryStage.setScene(scene);
