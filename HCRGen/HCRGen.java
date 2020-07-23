@@ -1,9 +1,11 @@
 package HCRGen;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.TextField;
@@ -16,6 +18,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import java.util.*;
 import javax.swing.*;
+import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.awt.*;
+import java.security.acl.*;
 
 
 public class HCRGen extends Application {
@@ -29,14 +36,14 @@ public class HCRGen extends Application {
 
 	
 	@Override
-	public void start(Stage primaryStage){
+	public void start(Stage primaryStage) throws FileNotFoundException{
 		//Create a main page VBox and set its atributes
 		VBox mainVB = new VBox();
 		mainVB.setMinSize(400, 400);
 		mainVB.setPadding(new Insets(10,10,10,10));
 		mainVB.setAlignment(Pos.TOP_CENTER);
 
-		//Create the main page HBox, VBox and set thier atributes
+		//Create the main page HBoxs, VBoxs and set thier atributes
 		HBox hb1 = new HBox();
 		hb1.setAlignment(Pos.TOP_CENTER);
 
@@ -44,46 +51,77 @@ public class HCRGen extends Application {
 		hb2.setAlignment(Pos.TOP_CENTER);
 		hb2.setPadding(new Insets(10,10,10,10));
 		hb2.setSpacing(10);
+		
 		HBox hb3 = new HBox();
 		hb3.setAlignment(Pos.TOP_CENTER);
 		hb3.setPadding(new Insets(10,10,10,10));
 		hb3.setSpacing(10);
+		
 		HBox hb4 = new HBox();
 		hb4.setAlignment(Pos.TOP_CENTER);
 		hb4.setPadding(new Insets(10,10,10,10));
 		hb4.setSpacing(10);
+		
 		HBox hb5 = new HBox();
 		hb5.setAlignment(Pos.TOP_CENTER);
 		hb5.setPadding(new Insets(10,10,10,10));
 		hb5.setSpacing(10);
+		
 		HBox hb6 = new HBox();
 		hb6.setAlignment(Pos.TOP_CENTER);
 		hb6.setPadding(new Insets(10,10,10,10));
 		hb6.setSpacing(10);
 		
+		HBox hb7 = new HBox();
+		hb6.setAlignment(Pos.TOP_LEFT);
+		hb6.setPadding(new Insets(10,10,10,10));
+		hb6.setSpacing(10);
+			
 		VBox vb1 = new VBox();
+		vb1.setAlignment(Pos.BOTTOM_LEFT);
+		vb1.setMinWidth(100);
+		
 		VBox vb2 = new VBox();
+		vb2.setAlignment(Pos.BOTTOM_LEFT);
+		vb2.setMinWidth(100);
+		
 		VBox vb3 = new VBox();
 		vb3.setAlignment(Pos.TOP_CENTER);
+		vb3.setMinWidth(100);
 		
-		/*
-		Items that go in hb1 go here
-			~ Imageview of logo
-			~ Buiseness Info
-			~ Invoice box
-		*/
+		VBox vb4 = new VBox();
+		vb4.setAlignment(Pos.TOP_LEFT);
+		vb4.setMinWidth(100);
+		
+	/*
+	Items that go in hb1 go here
+		~ Imageview of logo
+		~ Buiseness Info
+		~ Invoice box
+	*/
 		
 		//create GridPane for the logo, buissness information and invoice Box
 		GridPane headPane = new GridPane();
-		headPane.setMinSize(100, 100);
+		headPane.setMinSize(200, 100);
 		headPane.setPadding(new Insets(10,10,10,10));
-		headPane.setVgap(5);
-		headPane.setHgap(5);
-		headPane.setAlignment(Pos.TOP_CENTER);
-		headPane.setGridLinesVisible(true);
+		headPane.setVgap(50);
+		headPane.setHgap(60);
+		headPane.setAlignment(Pos.TOP_LEFT);
+		headPane.setGridLinesVisible(false);
 		
 		//create ImageView for logo and place in the grid
-	
+		//Creating a Label
+		Label logo = new Label();
+		
+		//Creating a graphic
+		Image img = new Image(new FileInputStream("/Users/student/Desktop/ITEC_2905_Capstone-Master/HCRGen/TONGS FIRE EXTINGUISHER SALES AND SERVICE/TONGS-FIRE-EXTINGUISHER-SALES-AND-SERVICE.jpg"));
+		ImageView view = new ImageView(img);
+		view.setFitHeight(125);
+		view.setFitWidth(225);
+		view.setPreserveRatio(false);
+		
+		logo.setGraphic(view);
+
 		//create address box labels for Tong's Fire Extinguisher Sales and Service
 		Label tongAdr1 = new Label(address1);
 		Label tongAdr2 = new Label(address2);
@@ -92,28 +130,30 @@ public class HCRGen extends Application {
 		Label tongLicNum2 = new Label(licNumTech2);
 		
 		//Create Address VBox for Tong's Fire Extinguisher Sales and Serviceinformation
-		
 		vb1.getChildren().addAll(tongAdr1, tongAdr2, tongPhone, tongLicNum1, tongLicNum2);
 		
 		//Create Invoice HBox and place it in the pane
 		VBox invVBox = new VBox();
+		invVBox.setAlignment(Pos.TOP_LEFT);
+		
 		Label invRefNum = new Label(" Invoice Reference #");
 		TextField tfInvoice = new TextField();
 		invVBox.getChildren().addAll(invRefNum, tfInvoice);
 		
 		//place boxes in the top pane
-		//headPane.add(image, 0,0);		
+		headPane.add(logo, 0,0);		
 		headPane.add(vb1, 1,0);
 		headPane.add(invVBox, 2,0);
 		
 		//add completed headPane to hb1
 		hb1.getChildren().addAll(headPane);
 		
-		/*
-		Items that go in hb2 go here
-			~ Service Info Box
-			~ Customer Info Box
-		*/
+	/*
+	Items that go in hb2 and go here
+		~ Service Info Box
+		~ Customer Info Box
+	*/
+	
 		//Create Service Scedule Information box
 		Label servLabel1 = new Label(" Service Scheduled with: ");
 		Label servLabel2 = new Label(" Store Closing Manager: ");
@@ -123,8 +163,10 @@ public class HCRGen extends Application {
 		Label servLabel6 = new Label(" Next Service Due: ");
 		Label servLabel8 = new Label(" ");
 		
-		TextField tfServ1 = new TextField();
+		TextField tfServ1 = new TextField("Bob \"The Mad Man\" Renolds");
+		tfServ1.setMinWidth(205);
 		TextField tfServ2 = new TextField();
+		tfServ2.setMaxWidth(275);
 		TextField tfServ3 = new TextField();
 		tfServ3.setMaxWidth(75);
 		TextField tfServ4 = new TextField();
@@ -135,19 +177,22 @@ public class HCRGen extends Application {
 		tfServ6.setMaxWidth(75);
 		
 		GridPane servGrid = new GridPane();
+		servGrid.setMinSize(400, 100);
+				
 		servGrid.add(servLabel1,0,0);
 		servGrid.add(tfServ1,1,0);
 		servGrid.add(servLabel2,0,1);
 		servGrid.add(tfServ2,1,1);
 		servGrid.add(servLabel3,0,2);
 		servGrid.add(tfServ3,1,2);
-		servGrid.add(servLabel4,2,2);
-		servGrid.add(tfServ4,3,2);
+		servGrid.add(servLabel4,0,4);
+		servGrid.add(tfServ4,1,4);
 		servGrid.add(servLabel5,0,3);
 		servGrid.add(tfServ5,1,3);
-		servGrid.add(servLabel6,2,3);
-		servGrid.add(tfServ6,3,3);
+		servGrid.add(servLabel6,0,5);
+		servGrid.add(tfServ6,1,5);
 		
+		servGrid.setAlignment(Pos.TOP_LEFT);
 		
 		//Create Second row of boxes for Customer information and place them on the grid
 		String custPhone = "";
@@ -164,40 +209,47 @@ public class HCRGen extends Application {
 		Label custAdrStateLabel = new Label(" State: ");
 		Label custAdrZipLabel = new Label(" Zip: ");
 		
-		TextField tfcustPhone = new TextField();
-		tfcustPhone.setMaxWidth(75);
-		TextField tfcustName = new TextField();
-		tfcustName.setMaxWidth(75);
-		TextField tfcustAdr = new TextField();
-		tfcustAdr.setMaxWidth(75);
-		TextField tfcustAdrCity = new TextField();
-		tfcustAdrCity.setMaxWidth(75);
-		TextField tfcustAdrState = new TextField();
-		tfcustAdrState.setMaxWidth(75);
-		TextField tfcustAdrZip = new TextField();
-		tfcustAdrZip.setMaxWidth(75);
+		TextField tfcustPhone = new TextField("435-896-8021");
+		tfcustPhone.setMaxWidth(115);
+		TextField tfcustName = new TextField("Ted \"Bob's Boss\" Williams");
+		tfcustName.setMinWidth(205);
+		TextField tfcustAdr = new TextField("BFE north of no-where");
+		tfcustAdr.setMaxWidth(275);
+		TextField tfcustAdrCity = new TextField("Cedar City");
+		tfcustAdrCity.setMaxWidth(115);
+		TextField tfcustAdrState = new TextField("Arizona");
+		tfcustAdrState.setMaxWidth(115);
+		TextField tfcustAdrZip = new TextField("84720");
+		tfcustAdrZip.setMaxWidth(115);
 		
 		GridPane custGrid = new GridPane();
-		custGrid.add(custPhoneLabel,0,0);
-		custGrid.add(tfcustPhone,1,0);
-		custGrid.add(custNameLabel,0,1);
-		custGrid.add(tfcustName,1,1);
-		custGrid.add(custAdrLabel,0,2);
-		custGrid.add(tfcustAdr,1,2);
-		custGrid.add(custAdrCityLabel,0,3);
-		custGrid.add(tfcustAdrCity,1,3);
-		custGrid.add(custAdrStateLabel,0,4);
-		custGrid.add(tfcustAdrState,1,4);
-		custGrid.add(custAdrZipLabel,0,5);
-		custGrid.add(tfcustAdrZip,1,5);
+		custGrid.add(custNameLabel,0,0);
+		custGrid.add(tfcustName,1,0);
+		
+		custGrid.add(custPhoneLabel,0,5);
+		custGrid.add(tfcustPhone,1,5);
+		
+		custGrid.add(custAdrLabel,0,1);
+		custGrid.add(tfcustAdr,1,1);
+		
+		custGrid.add(custAdrCityLabel,0,2);
+		custGrid.add(tfcustAdrCity,1,2);
+		
+		custGrid.add(custAdrStateLabel,0,3);
+		custGrid.add(tfcustAdrState,1,3);
+		
+		custGrid.add(custAdrZipLabel,0,4);
+		custGrid.add(tfcustAdrZip,1,4);
 
+		hb2.setAlignment(Pos.TOP_LEFT);
+		
 		hb2.getChildren().addAll(servGrid, custGrid);
 		
-		/*
-		Items that go in vb2 go here
-			~ Notes to technitians *servLabel7*
-			~ TextArea *taServ1*
-		*/
+	/*
+	Items that go in vb2 go here
+		~ Notes to technitians *servLabel7*
+		~ TextArea *taServ1*
+	*/
 		
 		//Create cleaning notes text rea and label
 		TextArea taServ1 = new TextArea();
@@ -215,11 +267,11 @@ public class HCRGen extends Application {
 		hb3.getChildren().add(clNoLabel);
 		
 
-		/*
-		Items that go in vb3 go here
-			~ Kitchen Exhaust Cleaning Service Report Title bar
-			~ Initial service check boxes
-		*/
+	/*
+	Items that go in vb3 go here
+		~ Kitchen Exhaust Cleaning Service Report Title bar
+		~ Initial service check boxes
+	*/
 		
 		//Create the kitchen cleaning service report boxes and place them in the grid
 		Label kECSRLabel = new Label("KITCHEN EXHAUST CLEANING SERVICE REPORT");
@@ -232,11 +284,12 @@ public class HCRGen extends Application {
 		
 		vb3.getChildren().addAll(kECSRLabel, hb4);
 		
-		/*
-		Items that go in hb5 go here
-			~ Check In Box
-			~ Check Out Box
-		*/
+	/*
+	Items that go in hb5 go here
+		~ Check In Box
+		~ Check Out Box
+	*/
+	
 		//Check In Box
 		Label checkInLabel = new Label("Check In: ");
 		Label cIYLabel = new Label("Yes ");
@@ -462,24 +515,40 @@ public class HCRGen extends Application {
 		
 		hb5.getChildren().addAll(cIBGrid, cOBGrid);
 		
-		/*
-		Items that go in hb6 go here
-			~ Time in Time out boxes 
-		*/
+	/*
+	Items that go in hb6 go here
+		~ Time in Time out boxes 
+	*/
+	
 		Label tILabel = new Label("TIME IN: ");
 		Label tOLabel = new Label("TIME OUT: ");
 		
-		TextField tfTI = new TextField();
+		TextField tfTI = new TextField("10:00 PM");
+		tfTI.setMaxWidth(80);
 		TextField tfTO = new TextField();
+		tfTO.setMaxWidth(80);
 		
 		hb6.getChildren().addAll(tILabel, tfTI, tOLabel, tfTO);
-		/*
-		Items that go in hb7 go here
-			~ Misc notes text field
-			~ Acknowledgement box
-		*/
 		
-		mainVB.getChildren().addAll(hb1, hb2, vb2, hb3, vb3, hb5, hb6);
+	/*
+	Items that go in hb7 go here
+		~ Misc notes text field
+		~ Acknowledgement box
+	*/
+		Label miscNotLabel = new Label("Miscellaneous Notes:");
+		Label techSigLabel = new Label("Technician: ");
+		Label techSigDate = new Label("Date: ");
+		
+		TextArea miscNotTa = new TextArea("All Items Marked NO must have an Explaination");
+		miscNotTa.setMaxHeight(80);
+		
+		vb4.getChildren().addAll(miscNotLabel, miscNotTa, techSigLabel, techSigDate);
+		
+		hb7.getChildren().addAll(vb4);
+		
+	/* END */
+		
+		mainVB.getChildren().addAll(hb1, hb2, vb2, hb3, vb3, hb5, hb6, hb7);
 		
 		//Create the misc Notes and Acknowledgment Boxes and place them in the grid
 		
