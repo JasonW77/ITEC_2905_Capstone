@@ -3,6 +3,7 @@ package HCRGen;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
@@ -23,8 +24,8 @@ import javax.swing.*;
 import java.io.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.awt.*;
 import java.security.acl.*;
+
 
 
 public class HCRGen extends Application {
@@ -76,14 +77,39 @@ public class HCRGen extends Application {
 		hb5.setSpacing(10);
 		
 		HBox hb6 = new HBox();
-		hb6.setAlignment(Pos.TOP_CENTER);
+		hb6.setAlignment(Pos.TOP_LEFT);
 		hb6.setPadding(new Insets(10,10,10,10));
 		hb6.setSpacing(10);
 		
 		HBox hb7 = new HBox();
-		hb6.setAlignment(Pos.TOP_LEFT);
-		hb6.setPadding(new Insets(10,10,10,10));
-		hb6.setSpacing(10);
+		hb7.setAlignment(Pos.TOP_LEFT);
+		hb7.setPadding(new Insets(10,10,10,10));
+		hb7.setSpacing(10);
+		
+		HBox hb8 = new HBox();
+		hb8.setAlignment(Pos.TOP_LEFT);
+		hb8.setPadding(new Insets(10,10,10,10));
+		hb8.setSpacing(10);
+		
+		HBox hb9 = new HBox();
+		hb9.setAlignment(Pos.TOP_LEFT);
+		hb9.setPadding(new Insets(10,10,10,10));
+		hb9.setSpacing(10);
+		
+		HBox hb10 = new HBox();
+		hb10.setAlignment(Pos.TOP_LEFT);
+		hb10.setPadding(new Insets(10,10,10,10));
+		hb10.setSpacing(10);
+		
+		HBox hb11 = new HBox();
+		hb11.setAlignment(Pos.TOP_LEFT);
+		hb11.setPadding(new Insets(10,10,10,10));
+		hb11.setSpacing(10);
+		
+		HBox hb12 = new HBox();
+		hb12.setAlignment(Pos.TOP_LEFT);
+		hb12.setPadding(new Insets(10,10,10,10));
+		hb12.setSpacing(10);
 			
 		VBox vb1 = new VBox();
 		vb1.setAlignment(Pos.BOTTOM_LEFT);
@@ -101,6 +127,9 @@ public class HCRGen extends Application {
 		vb4.setAlignment(Pos.TOP_LEFT);
 		vb4.setMinWidth(100);
 		
+		VBox vb5 = new VBox();
+		vb5.setAlignment(Pos.TOP_LEFT);
+		vb5.setMinWidth(100);
 	/*
 	Items that go in hb1 go here
 		~ Imageview of logo
@@ -146,6 +175,7 @@ public class HCRGen extends Application {
 		
 		Label invRefNum = new Label(" Invoice Reference #");
 		TextField tfInvoice = new TextField();
+		tfInvoice.setFont(new Font("Cambria", 10));
 		invVBox.getChildren().addAll(invRefNum, tfInvoice);
 		
 		//place boxes in the top pane
@@ -171,17 +201,23 @@ public class HCRGen extends Application {
 		Label servLabel6 = new Label(" Next Service Due: ");
 		Label servLabel8 = new Label(" ");
 		
-		TextField tfServ1 = new TextField("Bob \"The Mad Man\" Renolds");
+		TextField tfServ1 = new TextField();
 		tfServ1.setMinWidth(205);
+		tfServ1.setFont(new Font("Cambria", 10));
 		TextField tfServ2 = new TextField();
+		tfServ2.setFont(new Font("Cambria", 10));
 		tfServ2.setMaxWidth(275);
 		TextField tfServ3 = new TextField();
+		tfServ3.setFont(new Font("Cambria", 10));
 		tfServ3.setMaxWidth(75);
 		TextField tfServ4 = new TextField();
+		tfServ4.setFont(new Font("Cambria", 10));
 		tfServ4.setMaxWidth(75);
 		TextField tfServ5 = new TextField();
+		tfServ5.setFont(new Font("Cambria", 10));
 		tfServ5.setMaxWidth(75);
 		TextField tfServ6 = new TextField();
+		tfServ6.setFont(new Font("Cambria", 10));
 		tfServ6.setMaxWidth(75);
 		
 		GridPane servGrid = new GridPane();
@@ -217,17 +253,23 @@ public class HCRGen extends Application {
 		Label custAdrStateLabel = new Label(" State: ");
 		Label custAdrZipLabel = new Label(" Zip: ");
 		
-		TextField tfcustPhone = new TextField("435-896-8021");
+		TextField tfcustPhone = new TextField();
+		tfcustPhone.setFont(new Font("Cambria", 10));
 		tfcustPhone.setMaxWidth(115);
-		TextField tfcustName = new TextField("Ted \"Bob's Boss\" Williams");
+		TextField tfcustName = new TextField();
+		tfcustName.setFont(new Font("Cambria", 10));
 		tfcustName.setMinWidth(205);
-		TextField tfcustAdr = new TextField("BFE north of no-where");
+		TextField tfcustAdr = new TextField();
+		tfcustAdr.setFont(new Font("Cambria", 10));
 		tfcustAdr.setMaxWidth(275);
-		TextField tfcustAdrCity = new TextField("Cedar City");
+		TextField tfcustAdrCity = new TextField();
+		tfcustAdrCity.setFont(new Font("Cambria", 10));
 		tfcustAdrCity.setMaxWidth(115);
-		TextField tfcustAdrState = new TextField("Arizona");
+		TextField tfcustAdrState = new TextField();
+		tfcustAdrState.setFont(new Font("Cambria", 10));
 		tfcustAdrState.setMaxWidth(115);
-		TextField tfcustAdrZip = new TextField("84720");
+		TextField tfcustAdrZip = new TextField();
+		tfcustAdrZip.setFont(new Font("Cambria", 10));
 		tfcustAdrZip.setMaxWidth(115);
 		
 		GridPane custGrid = new GridPane();
@@ -262,6 +304,8 @@ public class HCRGen extends Application {
 		//Create cleaning notes text rea and label
 		TextArea taServ1 = new TextArea();
 		taServ1.setPrefHeight(50);
+		taServ1.setMaxWidth(750);
+
 		Label servLabel7 = new Label(" Notes for Cleaning Technicians: ");
 		vb2.getChildren().addAll(servLabel7, taServ1);
 		
@@ -270,8 +314,10 @@ public class HCRGen extends Application {
 			~ cleaning notice label *cLNOLabel*
 		*/
 		//Create the cleaning notice and place it in the grid
-		Label clNoLabel = new Label("All cleaning is in accordance with the local fire codes and/or NFPA Standard Code #96. This courtesy follow-up report \nis provided as a free customer service only; it is not a paid consultation. The inspection of the exhaust system is limited \nto the possible need for improved access and cleaning only. Other deficiencies, wether reported or not, are beyond the \nscope of our cleaning crew's knowledge. it is the owner of the exhaust system's responsibility to take appropriate \naction to modify any deficiencies noted herein or elsewhere.");
+		Label clNoLabel = new Label("All cleaning is in accordance with the local fire codes and/or NFPA Standard Code #96. This courtesy follow-up report is provided as a free customer service only; it is not a paid consultation. The inspection of the exhaust system is limited to the possible need for improved access and cleaning only. Other deficiencies, wether reported or not, are beyond the scope of our cleaning crew's knowledge. it is the owner of the exhaust system's responsibility to take appropriate action to modify any deficiencies noted herein or elsewhere.");
+		clNoLabel.setFont(new Font("Cambria", 10));
 		clNoLabel.setMaxWidth(750);
+		clNoLabel.setWrapText(true);
 		hb3.getChildren().add(clNoLabel);
 		
 
@@ -287,8 +333,8 @@ public class HCRGen extends Application {
 		CheckBox iScb = new CheckBox("INITIAL SERVICE ");
 		CheckBox rScb = new CheckBox("REGULAR SERVICE ");
 		CheckBox iNcb = new CheckBox("INSPECTION ");
-		hb4.getChildren().addAll(iScb, rScb, iNcb);
 		
+		hb4.getChildren().addAll(iScb, rScb, iNcb);
 		
 		vb3.getChildren().addAll(kECSRLabel, hb4);
 		
@@ -301,10 +347,15 @@ public class HCRGen extends Application {
 		//Check In Box
 		Label checkInLabel = new Label("Check In: ");
 		Label cIYLabel = new Label("Yes ");
+		cIYLabel.setFont(new Font("Cambria", 10));
 		Label cINLabel = new Label("No");
-		Label lightLabel = new Label("Lit ");
+		cINLabel.setFont(new Font("Cambria", 10));
+		Label lightLabel = new Label("Light ");
+		lightLabel.setFont(new Font("Cambria", 10));
 		Label mediumLabel = new Label("Med ");
-		Label heavyLabel = new Label("Hvy");
+		mediumLabel.setFont(new Font("Cambria", 10));
+		Label heavyLabel = new Label("Heavy");
+		heavyLabel.setFont(new Font("Cambria", 10));
 		Label dKWLabel = new Label("1. Key Works ");
 		Label fWPLabel = new Label("2. Fans working Pproperly ");
 		Label dIFWLabel = new Label("3. Defects in fan wiring ");
@@ -422,10 +473,13 @@ public class HCRGen extends Application {
 		//Check Out Box
 		Label checkOutLabel = new Label("Check Out: ");
 		Label cOYLabel = new Label("Yes");
+		cOYLabel.setFont(new Font("Cambria", 10));
 		Label cONLabel = new Label("No");
+		cONLabel.setFont(new Font("Cambria", 10));
 		Label cONewLabel = new Label("NEW    ");
-		Label cOULabel = new Label("UPDATED");
-		
+		cONewLabel.setFont(new Font("Cambria", 10));
+		Label cOULabel = new Label("UPDATE");
+		cOULabel.setFont(new Font("Cambria", 10));		
 		Label fWLRLabel = new Label("1. Fans working and left running ");
 		Label rANFROLabel = new Label("2. Roof area near fan rinsed off ");
 		Label hIWDLabel = new Label("3. Hood interior wiped dry ");
@@ -436,9 +490,11 @@ public class HCRGen extends Application {
 		Label aPGQLabel = new Label("8. Any access panels / give quantity ");
 		Label sDWTLabel = new Label("9. Stack / Ductwork water tight ");
 		Label pLRLabel = new Label("10. Pilot lights reignited ");
-		Label hSRLabel = new Label("11. Hood Sticker replaced ");
-		Label photoTLabel = new Label("12. Photos taken ");
-		Label inaccessibleLabel = new Label("INACESSIBLE AREAS AND/OR FIRE CODE VIOLATIONS EXIST");
+		Label photoTLabel = new Label("11. Photos taken ");
+		Label hSRLabel = new Label("12. Hood Sticker replaced ");
+
+		CheckBox inAccCB = new CheckBox("INACESSIBLE AREAS AND/OR FIRE CODE VIOLATIONS EXIST");
+		inAccCB.setFont(new Font("Cambria", 10));
 		
 		RadioButton fWLRrb1 = new RadioButton();
 		RadioButton fWLRrb2 = new RadioButton();
@@ -510,16 +566,18 @@ public class HCRGen extends Application {
 		cOBGrid.add(pLRrb1,1,10);
 		cOBGrid.add(pLRrb2,2,10);
 		
-		cOBGrid.add(cONewLabel,1,11);
-		cOBGrid.add(cOULabel,2,11);
+		cOBGrid.add(photoTLabel,0,11);
+		cOBGrid.add(photoTrb1,1,11);
+		cOBGrid.add(photoTrb2,2,11);
 		
-		cOBGrid.add(hSRLabel,0,12);
-		cOBGrid.add(hSRrb1,1,12);
-		cOBGrid.add(hSRrb2,2,12);
+		cOBGrid.add(cONewLabel,1,12);
+		cOBGrid.add(cOULabel,2,12);
 		
-		cOBGrid.add(photoTLabel,0,13);
-		cOBGrid.add(photoTrb1,1,13);
-		cOBGrid.add(photoTrb2,2,13);
+		cOBGrid.add(hSRLabel,0,13);
+		cOBGrid.add(hSRrb1,1,13);
+		cOBGrid.add(hSRrb2,2,13);
+		
+		cOBGrid.add(inAccCB,0,14);
 		
 		hb5.getChildren().addAll(cIBGrid, cOBGrid);
 		
@@ -531,9 +589,11 @@ public class HCRGen extends Application {
 		Label tILabel = new Label("TIME IN: ");
 		Label tOLabel = new Label("TIME OUT: ");
 		
-		TextField tfTI = new TextField("10:00 PM");
+		TextField tfTI = new TextField();
+		tfTI.setFont(new Font("Cambria", 10));
 		tfTI.setMaxWidth(80);
 		TextField tfTO = new TextField();
+		tfTO.setFont(new Font("Cambria", 10));
 		tfTO.setMaxWidth(80);
 		
 		hb6.getChildren().addAll(tILabel, tfTI, tOLabel, tfTO);
@@ -543,27 +603,60 @@ public class HCRGen extends Application {
 		~ Misc notes text field
 		~ Acknowledgement box
 	*/
+		//Create the misc Notes and Acknowledgment Boxes and place them in the grid
 		Label miscNotLabel = new Label("Miscellaneous Notes:");
-		Label techSigLabel = new Label("Technician: ");
-		Label techSigDate = new Label("Date: ");
+		Label techSigLabel = new Label("Technician:");
+		Label techSigDate = new Label("Date:    	");
+		Label claimLabel = new Label("\nClaims of unsatisfactory workmanship must be made within 48 hours. Invoices are subject to an intrest charge of the lesser of 1.5% per month(18% per year) or the maximum rate allowed by law on any unpaid invoices outstanding after 30 days from date of service. The Customer herby waives thier rights of subrogation by thier insurance carrier against Tong's Fire Extinguisher under any fire or liability insurance policy.");
+		claimLabel.setMaxWidth(375);
+		claimLabel.setFont(new Font("Cambria", 10));
+		claimLabel.setWrapText(true);
+
+		Label eventLabel = new Label("IN THE EVENT OF DEFAULT, TONG'S FIRE EXTINGUISHER SHALL BE ENTITLED TO RECOVER COST OF COLLECTION, INCLUDING REASONABLE ATTORNEY FEES.");
+		eventLabel.setMaxWidth(375);
+		eventLabel.setWrapText(true);
+		Label ackLabel = new Label("ACKNOWLEDGMENT OF KITCHEN CONDITION & KEC SERVICE COMPLETED. BY SIGNING BELOW THE CUSTOMER ACKNOWLEDGES SERVICE WAS COMPLETED AND THE KITCHEN WAS LEFT CLEAN AND IN SATISFACTORY CONDITION.");
+		ackLabel.setFont(new Font("Cambria", 10));
+		ackLabel.setWrapText(true);
+		ackLabel.setMaxWidth(375);
+		Label custSignLabel = new Label("Customer Name: ");
 		
 		TextArea miscNotTa = new TextArea("All Items Marked NO must have an Explaination");
-		miscNotTa.setMaxHeight(80);
+		miscNotTa.setFont(new Font("Cambria", 10));
+		miscNotTa.setWrapText(true);
+		miscNotTa.setMaxWidth(375);
+
+		TextField techtf = new TextField();
+		techtf.setFont(new Font("Cambria", 10));
+		TextField techDatetf = new TextField();
+		techDatetf.setFont(new Font("Cambria", 10));
+		TextField custSigntf = new TextField();
+		custSigntf.setFont(new Font("Cambria", 10));
 		
-		vb4.getChildren().addAll(miscNotLabel, miscNotTa, techSigLabel, techSigDate);
+		Button btFinish = new Button("Submit");
+				
+		hb9.getChildren().addAll(techSigLabel,techtf);
+		hb10.getChildren().addAll(techSigDate, techDatetf);
 		
-		hb7.getChildren().addAll(vb4);
+		vb4.getChildren().addAll(miscNotLabel, miscNotTa, hb9, hb10, btFinish);
+		
+		CheckBox keyCB = new CheckBox("Key ");
+		CheckBox noAvailCB = new CheckBox("No one available to sign ");
+		
+		hb8.getChildren().addAll(keyCB, noAvailCB);
+		hb11.getChildren().addAll(custSignLabel,custSigntf);
+		
+		vb5.getChildren().addAll(claimLabel, eventLabel, hb8, ackLabel, hb11);
+		
+		hb7.getChildren().addAll(vb4, vb5);
 		
 	/* END */
 		
 		mainVB.getChildren().addAll(hb1, hb2, vb2, hb3, vb3, hb5, hb6, hb7);
 		
-		//Create the misc Notes and Acknowledgment Boxes and place them in the grid
+
 		
-		
-		Button btFinish = new Button("Submit");
-		
-		Scene scene = new Scene(sp , 775, 1000);
+		Scene scene = new Scene(sp , 800, 1000);
 		
 		primaryStage.setTitle("HCRGen");
 		primaryStage.setScene(scene);
