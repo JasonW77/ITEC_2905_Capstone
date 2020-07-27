@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -330,9 +331,13 @@ public class HCRGen extends Application {
 		//Create the kitchen cleaning service report boxes and place them in the grid
 		Label kECSRLabel = new Label("KITCHEN EXHAUST CLEANING SERVICE REPORT");
 		
-		CheckBox iScb = new CheckBox("INITIAL SERVICE ");
-		CheckBox rScb = new CheckBox("REGULAR SERVICE ");
-		CheckBox iNcb = new CheckBox("INSPECTION ");
+		ToggleGroup kECSR = new ToggleGroup();
+		RadioButton iScb = new RadioButton("INITIAL SERVICE ");
+		iScb.setToggleGroup(kECSR);
+		RadioButton rScb = new RadioButton("REGULAR SERVICE ");
+		rScb.setToggleGroup(kECSR);
+		RadioButton iNcb = new RadioButton("INSPECTION ");
+		iNcb.setToggleGroup(kECSR);
 		
 		hb4.getChildren().addAll(iScb, rScb, iNcb);
 		
@@ -370,38 +375,93 @@ public class HCRGen extends Application {
 		Label gBUHLabel = new Label("12. Grease Build-Up on Hoods ");
 		Label gBUFiLabel = new Label("13. Grease Build-Up on Filter ");	
 		
+		ToggleGroup dkW = new ToggleGroup();
 		RadioButton dKWrb1 = new RadioButton();
+		dKWrb1.setToggleGroup(dkW);
 		RadioButton dKWrb2 = new RadioButton();
-		RadioButton fWPrb1 = new RadioButton();
-		RadioButton fWPrb2 = new RadioButton();
-		RadioButton dIFrb1 = new RadioButton();
-		RadioButton dIFrb2 = new RadioButton();
-		RadioButton aFHrb1 = new RadioButton();
-		RadioButton aFHrb2 = new RadioButton();
-		RadioButton fDWrb1 = new RadioButton();
-		RadioButton fDWrb2 = new RadioButton();
-		RadioButton hLWrb1 = new RadioButton();
-		RadioButton hLWrb2 = new RadioButton();
-		RadioButton hGPrb1 = new RadioButton();
-		RadioButton hGPrb2 = new RadioButton();
-		RadioButton rTCSrb1 = new RadioButton();
-		RadioButton rTCSrb2 = new RadioButton();
+		dKWrb2.setToggleGroup(dkW);
 		
+		ToggleGroup fWP = new ToggleGroup();
+		RadioButton fWPrb1 = new RadioButton();
+		fWPrb1.setToggleGroup(fWP);
+		RadioButton fWPrb2 = new RadioButton();
+		fWPrb2.setToggleGroup(fWP);
+		
+		ToggleGroup dIF = new ToggleGroup();
+		RadioButton dIFrb1 = new RadioButton();
+		dIFrb1.setToggleGroup(dIF);
+		RadioButton dIFrb2 = new RadioButton();
+		dIFrb2.setToggleGroup(dIF);
+		
+		ToggleGroup aFH = new ToggleGroup();
+		RadioButton aFHrb1 = new RadioButton();
+		aFHrb1.setToggleGroup(aFH);
+		RadioButton aFHrb2 = new RadioButton();
+		aFHrb2.setToggleGroup(aFH);
+		
+		ToggleGroup fDW = new ToggleGroup();
+		RadioButton fDWrb1 = new RadioButton();
+		fDWrb1.setToggleGroup(fDW);
+		RadioButton fDWrb2 = new RadioButton();
+		fDWrb2.setToggleGroup(fDW);
+		
+		ToggleGroup hLW = new ToggleGroup();
+		RadioButton hLWrb1 = new RadioButton();
+		hLWrb1.setToggleGroup(hLW);
+		RadioButton hLWrb2 = new RadioButton();
+		hLWrb2.setToggleGroup(hLW);
+		
+		ToggleGroup hGP = new ToggleGroup();
+		RadioButton hGPrb1 = new RadioButton();
+		hGPrb1.setToggleGroup(hGP);
+		RadioButton hGPrb2 = new RadioButton();
+		hGPrb2.setToggleGroup(hGP);
+		
+		ToggleGroup rTCS = new ToggleGroup();
+		RadioButton rTCSrb1 = new RadioButton();
+		rTCSrb1.setToggleGroup(rTCS);
+		RadioButton rTCSrb2 = new RadioButton();
+		rTCSrb2.setToggleGroup(rTCS);
+		
+		ToggleGroup gBURF = new ToggleGroup();
 		RadioButton gBURFrb1 = new RadioButton();
+		gBURFrb1.setToggleGroup(gBURF);
 		RadioButton gBURFrb2 = new RadioButton();
+		gBURFrb2.setToggleGroup(gBURF);
 		RadioButton gBURFrb3 = new RadioButton();
+		gBURFrb3.setToggleGroup(gBURF);
+		
+		ToggleGroup gBUFB = new ToggleGroup();
 		RadioButton gBUFBrb1 = new RadioButton();
+		gBUFBrb1.setToggleGroup(gBUFB);
 		RadioButton gBUFBrb2 = new RadioButton();
+		gBUFBrb2.setToggleGroup(gBUFB);
 		RadioButton gBUFBrb3 = new RadioButton();
+		gBUFBrb3.setToggleGroup(gBUFB);
+		
+		ToggleGroup gBUSD = new ToggleGroup();
 		RadioButton gBUSDrb1 = new RadioButton();
+		gBUSDrb1.setToggleGroup(gBUSD);
 		RadioButton gBUSDrb2 = new RadioButton();
+		gBUSDrb2.setToggleGroup(gBUSD);
 		RadioButton gBUSDrb3 = new RadioButton();
+		gBUSDrb3.setToggleGroup(gBUSD);
+		
+		ToggleGroup gBUH = new ToggleGroup();
 		RadioButton gBUHrb1 = new RadioButton();
+		gBUHrb1.setToggleGroup(gBUH);
 		RadioButton gBUHrb2 = new RadioButton();
+		gBUHrb2.setToggleGroup(gBUH);
 		RadioButton gBUHrb3 = new RadioButton();
+		gBUHrb3.setToggleGroup(gBUH);
+		
+		ToggleGroup gBUFi = new ToggleGroup();
 		RadioButton gBUFirb1 = new RadioButton();
+		gBUFirb1.setToggleGroup(gBUFi);
 		RadioButton gBUFirb2 = new RadioButton();
+		gBUFirb2.setToggleGroup(gBUFi);
 		RadioButton gBUFirb3 = new RadioButton();
+		gBUFirb3.setToggleGroup(gBUFi);
 
 		
 		GridPane cIBGrid = new GridPane();
@@ -496,30 +556,78 @@ public class HCRGen extends Application {
 		CheckBox inAccCB = new CheckBox("INACESSIBLE AREAS AND/OR FIRE CODE VIOLATIONS EXIST");
 		inAccCB.setFont(new Font("Cambria", 10));
 		
+		ToggleGroup fWLR = new ToggleGroup();
 		RadioButton fWLRrb1 = new RadioButton();
+		fWLRrb1.setToggleGroup(fWLR);
 		RadioButton fWLRrb2 = new RadioButton();
+		fWLRrb2.setToggleGroup(fWLR);
+		
+		ToggleGroup rANFRO = new ToggleGroup();
 		RadioButton rANFROrb1 = new RadioButton();
+		rANFROrb1.setToggleGroup(rANFRO);
 		RadioButton rANFROrb2 = new RadioButton();
+		rANFROrb2.setToggleGroup(rANFRO);
+		
+		
+		ToggleGroup hIWD = new ToggleGroup();
 		RadioButton hIWDrb1 = new RadioButton();
+		hIWDrb1.setToggleGroup(hIWD);
 		RadioButton hIWDrb2 = new RadioButton();
+		hIWDrb2.setToggleGroup(hIWD);
+		
+		ToggleGroup kFCEWD = new ToggleGroup();
 		RadioButton kFCEWDrb1 = new RadioButton();
+		kFCEWDrb1.setToggleGroup(kFCEWD);
 		RadioButton kFCEWDrb2 = new RadioButton();
+		kFCEWDrb2.setToggleGroup(kFCEWD);
+		
+		ToggleGroup oARC = new ToggleGroup();
 		RadioButton oARCrb1 = new RadioButton();
+		oARCrb1.setToggleGroup(oARC);
 		RadioButton oARCrb2 = new RadioButton();
+		oARCrb2.setToggleGroup(oARC);
+		
+		ToggleGroup hSFPW = new ToggleGroup();
 		RadioButton hSFPWrb1 = new RadioButton();
+		hSFPWrb1.setToggleGroup(hSFPW);
 		RadioButton hSFPWrb2 = new RadioButton();
+		hSFPWrb2.setToggleGroup(hSFPW);
+		
+		ToggleGroup hDGL = new ToggleGroup();
 		RadioButton hDGLrb1 = new RadioButton();
+		hDGLrb1.setToggleGroup(hDGL);
 		RadioButton hDGLrb2 = new RadioButton();
+		hDGLrb2.setToggleGroup(hDGL);
+		
+		ToggleGroup aPGQ = new ToggleGroup();
 		RadioButton aPGQrb1 = new RadioButton();
+		aPGQrb1.setToggleGroup(aPGQ);
 		RadioButton aPGQrb2 = new RadioButton();
+		aPGQrb2.setToggleGroup(aPGQ);
+		
+		ToggleGroup sDWT = new ToggleGroup();
 		RadioButton sDWTrb1 = new RadioButton();
+		sDWTrb1.setToggleGroup(sDWT);
 		RadioButton sDWTrb2 = new RadioButton();
+		sDWTrb2.setToggleGroup(sDWT);
+		
+		ToggleGroup pLR = new ToggleGroup();
 		RadioButton pLRrb1 = new RadioButton();
+		pLRrb1.setToggleGroup(pLR);
 		RadioButton pLRrb2 = new RadioButton();
+		pLRrb2.setToggleGroup(pLR);
+		
+		ToggleGroup hSR = new ToggleGroup();
 		RadioButton hSRrb1 = new RadioButton();
+		hSRrb1.setToggleGroup(hSR);
 		RadioButton hSRrb2 = new RadioButton();
+		hSRrb2.setToggleGroup(hSR);
+		
+		ToggleGroup photoT = new ToggleGroup();
 		RadioButton photoTrb1 = new RadioButton();
+		photoTrb1.setToggleGroup(photoT);
 		RadioButton photoTrb2 = new RadioButton();
+		photoTrb2.setToggleGroup(photoT);
 		
 		GridPane cOBGrid = new GridPane();
 		cOBGrid.add(checkOutLabel,0,0);
