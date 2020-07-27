@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.control.ScrollPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import java.util.*;
@@ -38,7 +40,11 @@ public class HCRGen extends Application {
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException{
 		//Create a main page VBox and set its atributes
+		ScrollPane sp = new ScrollPane();
 		VBox mainVB = new VBox();
+		mainVB.setVgrow(sp, Priority.ALWAYS);
+		sp.setContent(mainVB);
+
 		mainVB.setMinSize(400, 400);
 		mainVB.setPadding(new Insets(10,10,10,10));
 		mainVB.setAlignment(Pos.TOP_CENTER);
@@ -46,7 +52,9 @@ public class HCRGen extends Application {
 		//Create the main page HBoxs, VBoxs and set thier atributes
 		HBox hb1 = new HBox();
 		hb1.setAlignment(Pos.TOP_CENTER);
-
+		hb1.setPadding(new Insets(10,10,10,10));
+		hb1.setSpacing(10);
+		
 		HBox hb2 = new HBox();
 		hb2.setAlignment(Pos.TOP_CENTER);
 		hb2.setPadding(new Insets(10,10,10,10));
@@ -555,7 +563,7 @@ public class HCRGen extends Application {
 		
 		Button btFinish = new Button("Submit");
 		
-		Scene scene = new Scene(mainVB , 775, 1000);
+		Scene scene = new Scene(sp , 775, 1000);
 		
 		primaryStage.setTitle("HCRGen");
 		primaryStage.setScene(scene);
