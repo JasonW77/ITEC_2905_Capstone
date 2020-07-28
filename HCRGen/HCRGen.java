@@ -26,6 +26,12 @@ import java.io.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.security.acl.*;
+import javax.imageio.ImageIO;
+import java.awt.image.*;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.Dimension;
 
 
 
@@ -740,13 +746,29 @@ public class HCRGen extends Application {
 		techDatetf.setFont(new Font("Cambria", 10));
 		TextField custSigntf = new TextField();
 		custSigntf.setFont(new Font("Cambria", 10));
-		
 		Button btFinish = new Button("Submit");
 				
 		hb9.getChildren().addAll(techSigLabel,techtf);
 		hb10.getChildren().addAll(techSigDate, techDatetf);
 		
 		vb4.getChildren().addAll(miscNotLabel, miscNotTa, hb9, hb10, btFinish);
+		
+		//send image of GUI to file.
+		btFinish.setOnAction(e -> {
+			
+			try (
+				FileOutputStream oos = new FileOutputStream("Tongs_Report", true);
+				){
+				captureScreen("Tongs_Report");
+				System.out.println("Image saved to file!");
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			
+			
+			
+		});
 		
 		CheckBox keyCB = new CheckBox("Key ");
 		CheckBox noAvailCB = new CheckBox("No one available to sign ");
@@ -767,9 +789,19 @@ public class HCRGen extends Application {
 		Scene scene = new Scene(sp , 800, 1000);
 		
 		primaryStage.setTitle("HCRGen");
+		primaryStage.setX(0);
+		primaryStage.setY(0);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
+	}
+	
+	public void captureScreen(String fileName) throws Exception {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Rectangle screenRectangle = new Rectangle(10, 45, 775, 944);
+		Robot robot = new Robot();
+		BufferedImage image = robot.createScreenCapture(screenRectangle);
+		ImageIO.write(image, "png", new File(fileName));
 	}
 	public static void main(String[] args){
 			Application.launch(args);
