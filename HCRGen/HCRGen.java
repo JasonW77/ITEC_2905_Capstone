@@ -21,6 +21,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import java.util.*;
+import javafx.scene.layout.StackPane;
+import java.awt.ActiveEvent;
 import javax.swing.*;
 import java.io.*;
 import java.io.FileInputStream;
@@ -32,6 +34,7 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.Dimension;
+import java.awt.*;
 
 
 
@@ -181,7 +184,7 @@ public class HCRGen extends Application {
 		invVBox.setAlignment(Pos.TOP_LEFT);
 		
 		Label invRefNum = new Label(" Invoice Reference #");
-		TextField tfInvoice = new TextField();
+		TextField tfInvoice = new TextField("fake number");
 		tfInvoice.setFont(new Font("Cambria", 10));
 		invVBox.getChildren().addAll(invRefNum, tfInvoice);
 		
@@ -208,22 +211,22 @@ public class HCRGen extends Application {
 		Label servLabel6 = new Label(" Next Service Due: ");
 		Label servLabel8 = new Label(" ");
 		
-		TextField tfServ1 = new TextField();
+		TextField tfServ1 = new TextField("Fake Name 1");
 		tfServ1.setMinWidth(205);
 		tfServ1.setFont(new Font("Cambria", 10));
-		TextField tfServ2 = new TextField();
+		TextField tfServ2 = new TextField("Fake Name 2");
 		tfServ2.setFont(new Font("Cambria", 10));
 		tfServ2.setMaxWidth(275);
-		TextField tfServ3 = new TextField();
+		TextField tfServ3 = new TextField("Fake Date 1");
 		tfServ3.setFont(new Font("Cambria", 10));
 		tfServ3.setMaxWidth(75);
-		TextField tfServ4 = new TextField();
+		TextField tfServ4 = new TextField("Fake Date 2");
 		tfServ4.setFont(new Font("Cambria", 10));
 		tfServ4.setMaxWidth(75);
-		TextField tfServ5 = new TextField();
+		TextField tfServ5 = new TextField("Fake Time");
 		tfServ5.setFont(new Font("Cambria", 10));
 		tfServ5.setMaxWidth(75);
-		TextField tfServ6 = new TextField();
+		TextField tfServ6 = new TextField("Fake Date 3");
 		tfServ6.setFont(new Font("Cambria", 10));
 		tfServ6.setMaxWidth(75);
 		
@@ -236,10 +239,10 @@ public class HCRGen extends Application {
 		servGrid.add(tfServ2,1,1);
 		servGrid.add(servLabel3,0,2);
 		servGrid.add(tfServ3,1,2);
-		servGrid.add(servLabel4,0,4);
-		servGrid.add(tfServ4,1,4);
 		servGrid.add(servLabel5,0,3);
 		servGrid.add(tfServ5,1,3);
+		servGrid.add(servLabel4,0,4);
+		servGrid.add(tfServ4,1,4);
 		servGrid.add(servLabel6,0,5);
 		servGrid.add(tfServ6,1,5);
 		
@@ -260,31 +263,28 @@ public class HCRGen extends Application {
 		Label custAdrStateLabel = new Label(" State: ");
 		Label custAdrZipLabel = new Label(" Zip: ");
 		
-		TextField tfcustPhone = new TextField();
+		TextField tfcustPhone = new TextField("Fake Phone Number");
 		tfcustPhone.setFont(new Font("Cambria", 10));
 		tfcustPhone.setMaxWidth(115);
-		TextField tfcustName = new TextField();
+		TextField tfcustName = new TextField("Fake Name 1");
 		tfcustName.setFont(new Font("Cambria", 10));
 		tfcustName.setMinWidth(205);
-		TextField tfcustAdr = new TextField();
+		TextField tfcustAdr = new TextField("Fake address");
 		tfcustAdr.setFont(new Font("Cambria", 10));
 		tfcustAdr.setMaxWidth(275);
-		TextField tfcustAdrCity = new TextField();
+		TextField tfcustAdrCity = new TextField("Fake City");
 		tfcustAdrCity.setFont(new Font("Cambria", 10));
 		tfcustAdrCity.setMaxWidth(115);
-		TextField tfcustAdrState = new TextField();
+		TextField tfcustAdrState = new TextField("Fake State");
 		tfcustAdrState.setFont(new Font("Cambria", 10));
 		tfcustAdrState.setMaxWidth(115);
-		TextField tfcustAdrZip = new TextField();
+		TextField tfcustAdrZip = new TextField("Fake Zipcode");
 		tfcustAdrZip.setFont(new Font("Cambria", 10));
 		tfcustAdrZip.setMaxWidth(115);
 		
 		GridPane custGrid = new GridPane();
 		custGrid.add(custNameLabel,0,0);
 		custGrid.add(tfcustName,1,0);
-		
-		custGrid.add(custPhoneLabel,0,5);
-		custGrid.add(tfcustPhone,1,5);
 		
 		custGrid.add(custAdrLabel,0,1);
 		custGrid.add(tfcustAdr,1,1);
@@ -297,7 +297,10 @@ public class HCRGen extends Application {
 		
 		custGrid.add(custAdrZipLabel,0,4);
 		custGrid.add(tfcustAdrZip,1,4);
-
+		
+		custGrid.add(custPhoneLabel,0,5);
+		custGrid.add(tfcustPhone,1,5);
+		
 		hb2.setAlignment(Pos.TOP_LEFT);
 		
 		hb2.getChildren().addAll(servGrid, custGrid);
@@ -309,11 +312,12 @@ public class HCRGen extends Application {
 	*/
 		
 		//Create cleaning notes text rea and label
-		TextArea taServ1 = new TextArea();
+		TextArea taServ1 = new TextArea("Fake cleaning Notes");
 		taServ1.setPrefHeight(50);
 		taServ1.setMaxWidth(750);
 
 		Label servLabel7 = new Label(" Notes for Cleaning Technicians: ");
+		
 		vb2.getChildren().addAll(servLabel7, taServ1);
 		
 		/*
@@ -703,10 +707,10 @@ public class HCRGen extends Application {
 		Label tILabel = new Label("TIME IN: ");
 		Label tOLabel = new Label("TIME OUT: ");
 		
-		TextField tfTI = new TextField();
+		TextField tfTI = new TextField("Fake Time in");
 		tfTI.setFont(new Font("Cambria", 10));
 		tfTI.setMaxWidth(80);
-		TextField tfTO = new TextField();
+		TextField tfTO = new TextField("Fake Time out");
 		tfTO.setFont(new Font("Cambria", 10));
 		tfTO.setMaxWidth(80);
 		
@@ -718,7 +722,7 @@ public class HCRGen extends Application {
 		~ Acknowledgement box
 	*/
 		//Create the misc Notes and Acknowledgment Boxes and place them in the grid
-		Label miscNotLabel = new Label("Miscellaneous Notes:");
+		Label miscNotLabel = new Label("Misc. Notes: All Items Marked NO must have an Explaination");
 		Label techSigLabel = new Label("Technician:");
 		Label techSigDate = new Label("Date:    	");
 		Label claimLabel = new Label("\nClaims of unsatisfactory workmanship must be made within 48 hours. Invoices are subject to an intrest charge of the lesser of 1.5% per month(18% per year) or the maximum rate allowed by law on any unpaid invoices outstanding after 30 days from date of service. The Customer herby waives thier rights of subrogation by thier insurance carrier against Tong's Fire Extinguisher under any fire or liability insurance policy.");
@@ -735,7 +739,7 @@ public class HCRGen extends Application {
 		ackLabel.setMaxWidth(375);
 		Label custSignLabel = new Label("Customer Name: ");
 		
-		TextArea miscNotTa = new TextArea("All Items Marked NO must have an Explaination");
+		TextArea miscNotTa = new TextArea("Fake Misc notes");
 		miscNotTa.setFont(new Font("Cambria", 10));
 		miscNotTa.setWrapText(true);
 		miscNotTa.setMaxWidth(375);
@@ -747,14 +751,84 @@ public class HCRGen extends Application {
 		TextField custSigntf = new TextField();
 		custSigntf.setFont(new Font("Cambria", 10));
 		Button btFinish = new Button("Submit");
-				
+		Button btPrint = new Button("Print");
+		
 		hb9.getChildren().addAll(techSigLabel,techtf);
 		hb10.getChildren().addAll(techSigDate, techDatetf);
 		
-		vb4.getChildren().addAll(miscNotLabel, miscNotTa, hb9, hb10, btFinish);
+		vb4.getChildren().addAll(miscNotLabel, miscNotTa, hb9, hb10, btFinish, btPrint);
 		
 		//send image of GUI to file.
 		btFinish.setOnAction(e -> {
+				Label printLabel = new Label("HCRGen Report");
+				
+				StackPane printStage = new StackPane();
+				TextArea printTa = new TextArea();
+				printTa.setEditable(false);
+			
+				printTa.appendText("Tong's Fire Extinguisher Sales and Service\t\t\t\t\tInvoice Number: \t" + tfInvoice.getText() + "\n"
+				+ " P.O. Box 135 Elsinore, UT 84724\t\t\t\t\t\t\t" + tfcustName.getText() + "\n"
+				+ " P.O. Box 3101 Cedar City, UT 84721\t\t\t\t\t\t" +  tfcustAdr.getText() + "\n"
+				+ " (435) 201-2182\t\t\t\t\t\t\t\t\t\t" + tfcustAdrCity.getText() + ", " + tfcustAdrState.getText() + ", " +tfcustAdrZip.getText()+ "\n"
+				+ "Lic. #'s KE82431, "+ "KE113954\t\t\t\t\t\t\t\t" + tfcustPhone.getText() + "\n" 
+				+ "\n"
+				+ " Service Scheduled with:\t" + tfServ1.getText() + "\n"
+				+ " Store Closing Manager:\t" + tfServ2.getText()+ "\n"
+				+ " Date of Service:\t\t\t" + tfServ3.getText()+ "\n"
+				+ " Service Every:\t\t\t" + tfServ4.getText()+ "\n"
+				+ " Time of Service:\t\t\t" + tfServ5.getText()+ "\n"
+				+ " Next Service Due:\t\t\t" + tfServ6.getText()+ "\n"
+				+ "\n"
+				+ "Notes to cleaning Technicians:\n"
+				+ taServ1.getText() + "\n"
+				+ "\n"
+				+ "All cleaning is in accordance with the local fire codes and/or NFPA Standard Code #96. This courtesy follow-up report is \nprovided as a free customer service only; it is not a paid consultation. The inspection of the exhaust system is limited to the \npossible need for improved access and cleaning only. Other deficiencies, wether reported or not, are beyond the scope of our \ncleaning crew's knowledge. it is the owner of the exhaust system's responsibility to take appropriate action to modify any \ndeficiencies noted herein or elsewhere.\n"
+				+ "\n"
+				+ "KITCHEN EXHAUST CLEANING SERVICE REPORT\n"
+				+ "Type of Service completed:\t" + "\n"
+				+ "Check in: \t\t\t\t\t\t\t\t\t\t Check Out: " + "\n"
+				+ "1. Key works: \t\t\t\t\t\t\t\t\t\t" + "1. Fans working and left running: " + "\n"
+				+ "2. Fans working propperly: \t\t\t\t\t\t\t" + "2. Roof area near fan rised off: " + "\n"
+				+ "3. Defects in fan wiring: \t\t\t\t\t\t\t" + "3. Hood interior wiped dry: " + "\n"
+				+ "4. Fans hinged: \t\t\t\t\t\t\t\t\t" + "4. Kitchen floor clean/Equipment wiped down: " + "\n"
+				+ "5. Floor drains working: \t\t\t\t\t\t\t" + "5. Outside area rinsed and clean: " + "\n"
+				+ "6. Hood lights working: \t\t\t\t\t\t\t\t" + "6. Hood, Stack, Fan pressure washed: " + "\n"
+				+ "7. Hood globes present: \t\t\t\t\t\t\t" + "7. Any horizontal ductwork: " + "\n"
+				+ "8. Rooftop grease containment system: \t\t\t\t" + "8. any acess panels: " + "\n"
+				+ "9. Grease buildup around roof fan: \t\t\t\t\t" + "9. Stack/Ductwork water tight: " + "\n"
+				+ "10. Grease build up on fan blades: \t\t\t\t\t" + "10. Pilot lights reignited: " + "\n"
+				+ "11. Grease build up on Stacks/Ductwork: \t\t\t\t" + "11. Photos taken: " + "\n"
+				+ "12. Grease build up on Hoods: \t\t\t\t\t\t" + "12. Hood Sticker replaced: " + "\n"
+				+ "13. Grease build up on Filter: \t\t\t\t\t\t" + "Inaccessible areas?: " + "\n"
+				+ "Time In:\t" + tfTI.getText()+ " \t\t\t\t\t\t\t\tTime Out:\t" + tfTO.getText()+ "\n"
+				+ "Miscellaneous Notes:\n"
+				+ miscNotTa.getText() + "\n"
+				+ "Cleaning Technician that performed service: " + techtf.getText() + "\t\t\t\t\t\t Date Completed: " + techDatetf.getText() +"\n"
+				+ "\nClaims of unsatisfactory workmanship must be made within 48 hours. Invoices are subject to an intrest charge of the lesser of \n1.5% per month(18% per year) or the maximum rate allowed by law on any unpaid invoices outstanding after 30 days from date \nof service. The Customer herby waives thier rights of subrogation by thier insurance carrier against Tong's Fire Extinguisher \nunder any fire or liability insurance policy.\n"
+				+ "IN THE EVENT OF DEFAULT, TONG'S FIRE EXTINGUISHER SHALL BE ENTITLED TO RECOVER COST OF COLLECTION, \nINCLUDING REASONABLE ATTORNEY FEES. \nACKNOWLEDGMENT OF KITCHEN CONDITION & KEC SERVICE COMPLETED. BY SIGNING BELOW THE CUSTOMER \nACKNOWLEDGES SERVICE WAS COMPLETED AND THE KITCHEN WAS LEFT CLEAN AND IN SATISFACTORY CONDITION.\n"
+
+				
+				);
+				/*				
+
+				*/
+				printStage.getChildren().addAll(printLabel,printTa);
+
+				Scene printScene = new Scene(printStage , 800, 1000);
+				
+				Stage printWindow = new Stage();
+				printWindow.setTitle("HCRGen Report");
+				printWindow.setScene(printScene);
+				
+				printWindow.setX(100);
+				printWindow.setY(100);
+				
+				printWindow.show();
+			//}
+
+		});
+		
+		btPrint.setOnAction(e -> {
 			
 			try (
 				FileOutputStream oos = new FileOutputStream("Tongs_Report", true);
@@ -765,8 +839,6 @@ public class HCRGen extends Application {
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-			
-			
 			
 		});
 		
@@ -783,8 +855,6 @@ public class HCRGen extends Application {
 	/* END */
 		
 		mainVB.getChildren().addAll(hb1, hb2, vb2, hb3, vb3, hb5, hb6, hb7);
-		
-
 		
 		Scene scene = new Scene(sp , 800, 1000);
 		
