@@ -46,7 +46,35 @@ public class HCRGen extends Application {
 	String address1 = " P.O. Box 135 \n Elsinore, UT 84724";
 	String address2 = " P.O. Box 3101 \n Cedar City, UT 84721";
 	String phoneNum = " (435) 201-2182";
-
+	String serviceType = "";
+	String dkWSt = "";
+	String fWPSt = "";
+	String dIFSt = "";
+	String aFHSt = "";
+	String fDWSt = "";
+	String hLWSt = "";
+	String hGPSt = "";
+	String rTCSSt = "";
+	String gBURFSt = "";
+	String gBUFBSt = "";
+	String gBUSDSt = "";
+	String gBUHSt = "";
+	String gBUFiSt = "";
+	String inAccCBSt = "Some Areas Not Accesible!";
+	String fWLRSt = "";
+	String rANFROSt = "";
+	String hIWDSt = "";
+	String kFCEWDSt = "";
+	String oARCSt = "";
+	String hSFPWSt = "";
+	String hDGLSt = "";
+	String aPGQSt = "";
+	String sDWTSt = "";
+	String pLRSt = "";
+	String hSRSt = "";
+	String photoTSt = "";
+	String keyCBSt = "";
+	String noAvailCBSt = "";
 	
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException{
@@ -349,6 +377,7 @@ public class HCRGen extends Application {
 		RadioButton iNcb = new RadioButton("INSPECTION ");
 		iNcb.setToggleGroup(kECSR);
 		
+		
 		hb4.getChildren().addAll(iScb, rScb, iNcb);
 		
 		vb3.getChildren().addAll(kECSRLabel, hb4);
@@ -390,48 +419,56 @@ public class HCRGen extends Application {
 		dKWrb1.setToggleGroup(dkW);
 		RadioButton dKWrb2 = new RadioButton();
 		dKWrb2.setToggleGroup(dkW);
+		//String dkWSt = "";
 		
 		ToggleGroup fWP = new ToggleGroup();
 		RadioButton fWPrb1 = new RadioButton();
 		fWPrb1.setToggleGroup(fWP);
 		RadioButton fWPrb2 = new RadioButton();
 		fWPrb2.setToggleGroup(fWP);
+		//String fWPSt = "";
 		
 		ToggleGroup dIF = new ToggleGroup();
 		RadioButton dIFrb1 = new RadioButton();
 		dIFrb1.setToggleGroup(dIF);
 		RadioButton dIFrb2 = new RadioButton();
 		dIFrb2.setToggleGroup(dIF);
+		//String dIFSt = "";
 		
 		ToggleGroup aFH = new ToggleGroup();
 		RadioButton aFHrb1 = new RadioButton();
 		aFHrb1.setToggleGroup(aFH);
 		RadioButton aFHrb2 = new RadioButton();
 		aFHrb2.setToggleGroup(aFH);
+		//String aFHSt = "";
 		
 		ToggleGroup fDW = new ToggleGroup();
 		RadioButton fDWrb1 = new RadioButton();
 		fDWrb1.setToggleGroup(fDW);
 		RadioButton fDWrb2 = new RadioButton();
 		fDWrb2.setToggleGroup(fDW);
+		//String fDWSt = "";
 		
 		ToggleGroup hLW = new ToggleGroup();
 		RadioButton hLWrb1 = new RadioButton();
 		hLWrb1.setToggleGroup(hLW);
 		RadioButton hLWrb2 = new RadioButton();
 		hLWrb2.setToggleGroup(hLW);
+		//String hLWSt = "";
 		
 		ToggleGroup hGP = new ToggleGroup();
 		RadioButton hGPrb1 = new RadioButton();
 		hGPrb1.setToggleGroup(hGP);
 		RadioButton hGPrb2 = new RadioButton();
 		hGPrb2.setToggleGroup(hGP);
+		//String hGPSt = "";
 		
 		ToggleGroup rTCS = new ToggleGroup();
 		RadioButton rTCSrb1 = new RadioButton();
 		rTCSrb1.setToggleGroup(rTCS);
 		RadioButton rTCSrb2 = new RadioButton();
 		rTCSrb2.setToggleGroup(rTCS);
+		//String rTCSSt = "";
 		
 		ToggleGroup gBURF = new ToggleGroup();
 		RadioButton gBURFrb1 = new RadioButton();
@@ -440,6 +477,7 @@ public class HCRGen extends Application {
 		gBURFrb2.setToggleGroup(gBURF);
 		RadioButton gBURFrb3 = new RadioButton();
 		gBURFrb3.setToggleGroup(gBURF);
+		//String gBURFSt = "";
 		
 		ToggleGroup gBUFB = new ToggleGroup();
 		RadioButton gBUFBrb1 = new RadioButton();
@@ -448,6 +486,7 @@ public class HCRGen extends Application {
 		gBUFBrb2.setToggleGroup(gBUFB);
 		RadioButton gBUFBrb3 = new RadioButton();
 		gBUFBrb3.setToggleGroup(gBUFB);
+		//String gBUFBSt = "";
 		
 		ToggleGroup gBUSD = new ToggleGroup();
 		RadioButton gBUSDrb1 = new RadioButton();
@@ -456,6 +495,7 @@ public class HCRGen extends Application {
 		gBUSDrb2.setToggleGroup(gBUSD);
 		RadioButton gBUSDrb3 = new RadioButton();
 		gBUSDrb3.setToggleGroup(gBUSD);
+		//String gBUSDSt = "";
 		
 		ToggleGroup gBUH = new ToggleGroup();
 		RadioButton gBUHrb1 = new RadioButton();
@@ -464,6 +504,7 @@ public class HCRGen extends Application {
 		gBUHrb2.setToggleGroup(gBUH);
 		RadioButton gBUHrb3 = new RadioButton();
 		gBUHrb3.setToggleGroup(gBUH);
+		//String gBUHSt = "";
 		
 		ToggleGroup gBUFi = new ToggleGroup();
 		RadioButton gBUFirb1 = new RadioButton();
@@ -472,6 +513,7 @@ public class HCRGen extends Application {
 		gBUFirb2.setToggleGroup(gBUFi);
 		RadioButton gBUFirb3 = new RadioButton();
 		gBUFirb3.setToggleGroup(gBUFi);
+		//String gBUFiSt = "";
 
 		
 		GridPane cIBGrid = new GridPane();
@@ -565,79 +607,91 @@ public class HCRGen extends Application {
 
 		CheckBox inAccCB = new CheckBox("INACESSIBLE AREAS AND/OR FIRE CODE VIOLATIONS EXIST");
 		inAccCB.setFont(new Font("Cambria", 10));
+		//String inAccCBSt = "";
 		
 		ToggleGroup fWLR = new ToggleGroup();
 		RadioButton fWLRrb1 = new RadioButton();
 		fWLRrb1.setToggleGroup(fWLR);
 		RadioButton fWLRrb2 = new RadioButton();
 		fWLRrb2.setToggleGroup(fWLR);
+		//String fWLRSt = "";
 		
 		ToggleGroup rANFRO = new ToggleGroup();
 		RadioButton rANFROrb1 = new RadioButton();
 		rANFROrb1.setToggleGroup(rANFRO);
 		RadioButton rANFROrb2 = new RadioButton();
 		rANFROrb2.setToggleGroup(rANFRO);
-		
+		//String rANFROSt = "";
 		
 		ToggleGroup hIWD = new ToggleGroup();
 		RadioButton hIWDrb1 = new RadioButton();
 		hIWDrb1.setToggleGroup(hIWD);
 		RadioButton hIWDrb2 = new RadioButton();
 		hIWDrb2.setToggleGroup(hIWD);
+		//String hIWDSt = "";
 		
 		ToggleGroup kFCEWD = new ToggleGroup();
 		RadioButton kFCEWDrb1 = new RadioButton();
 		kFCEWDrb1.setToggleGroup(kFCEWD);
 		RadioButton kFCEWDrb2 = new RadioButton();
 		kFCEWDrb2.setToggleGroup(kFCEWD);
+		//String kFCEWDSt = "";
 		
 		ToggleGroup oARC = new ToggleGroup();
 		RadioButton oARCrb1 = new RadioButton();
 		oARCrb1.setToggleGroup(oARC);
 		RadioButton oARCrb2 = new RadioButton();
 		oARCrb2.setToggleGroup(oARC);
+		//String oARCSt = "";
 		
 		ToggleGroup hSFPW = new ToggleGroup();
 		RadioButton hSFPWrb1 = new RadioButton();
 		hSFPWrb1.setToggleGroup(hSFPW);
 		RadioButton hSFPWrb2 = new RadioButton();
 		hSFPWrb2.setToggleGroup(hSFPW);
+		//String hSFPWSt = "";
 		
 		ToggleGroup hDGL = new ToggleGroup();
 		RadioButton hDGLrb1 = new RadioButton();
 		hDGLrb1.setToggleGroup(hDGL);
 		RadioButton hDGLrb2 = new RadioButton();
 		hDGLrb2.setToggleGroup(hDGL);
+		//String hDGLSt = "";
 		
 		ToggleGroup aPGQ = new ToggleGroup();
 		RadioButton aPGQrb1 = new RadioButton();
 		aPGQrb1.setToggleGroup(aPGQ);
 		RadioButton aPGQrb2 = new RadioButton();
 		aPGQrb2.setToggleGroup(aPGQ);
+		//String aPGQSt = "";
 		
 		ToggleGroup sDWT = new ToggleGroup();
 		RadioButton sDWTrb1 = new RadioButton();
 		sDWTrb1.setToggleGroup(sDWT);
 		RadioButton sDWTrb2 = new RadioButton();
 		sDWTrb2.setToggleGroup(sDWT);
+		//String sDWTSt = "";
 		
 		ToggleGroup pLR = new ToggleGroup();
 		RadioButton pLRrb1 = new RadioButton();
 		pLRrb1.setToggleGroup(pLR);
 		RadioButton pLRrb2 = new RadioButton();
 		pLRrb2.setToggleGroup(pLR);
+		//String pLRSt = "";
 		
 		ToggleGroup hSR = new ToggleGroup();
 		RadioButton hSRrb1 = new RadioButton();
 		hSRrb1.setToggleGroup(hSR);
 		RadioButton hSRrb2 = new RadioButton();
 		hSRrb2.setToggleGroup(hSR);
+		//String hSRSt = "";
 		
 		ToggleGroup photoT = new ToggleGroup();
 		RadioButton photoTrb1 = new RadioButton();
 		photoTrb1.setToggleGroup(photoT);
 		RadioButton photoTrb2 = new RadioButton();
 		photoTrb2.setToggleGroup(photoT);
+		//String photoTSt = "";
 		
 		GridPane cOBGrid = new GridPane();
 		cOBGrid.add(checkOutLabel,0,0);
@@ -753,10 +807,109 @@ public class HCRGen extends Application {
 		Button btFinish = new Button("Submit");
 		Button btPrint = new Button("Print");
 		
+		CheckBox keyCB = new CheckBox("Key ");
+		//String keyCBSt = "No";
+		CheckBox noAvailCB = new CheckBox("No one available to sign ");
+		//String noAvailCBSt = "No one available to sign ";
+		
+		hb7.getChildren().addAll(vb4, vb5);
+		hb8.getChildren().addAll(keyCB, noAvailCB);
 		hb9.getChildren().addAll(techSigLabel,techtf);
 		hb10.getChildren().addAll(techSigDate, techDatetf);
+		hb11.getChildren().addAll(custSignLabel,custSigntf);
 		
 		vb4.getChildren().addAll(miscNotLabel, miscNotTa, hb9, hb10, btFinish, btPrint);
+		vb5.getChildren().addAll(claimLabel, eventLabel, hb8, ackLabel, hb11);
+		
+		//OnAction events for radio buttons and checkboxes
+		iScb.setOnAction(e -> {setServiceType("Initial Service");});
+		rScb.setOnAction(e -> {setServiceType("Regular Service");});
+		iNcb.setOnAction(e -> {setServiceType("Inspection");});
+		
+		dKWrb1.setOnAction(e -> { });
+		dKWrb2.setOnAction(e -> { });
+				
+		fWPrb1.setOnAction(e -> { });
+		fWPrb2.setOnAction(e -> { });
+		
+		dIFrb1.setOnAction(e -> { });
+		dIFrb2.setOnAction(e -> { });
+		
+		aFHrb1.setOnAction(e -> {});
+		aFHrb2.setOnAction(e -> {});
+		
+		fDWrb1.setOnAction(e -> {});
+		fDWrb2.setOnAction(e -> {});
+		
+		hLWrb1.setOnAction(e -> {});
+		hLWrb2.setOnAction(e -> {});
+		
+		hGPrb1.setOnAction(e -> {});
+		hGPrb2.setOnAction(e -> {});
+		
+		rTCSrb1.setOnAction(e -> {});
+		rTCSrb2.setOnAction(e -> {});
+		
+		gBURFrb1.setOnAction(e -> {});
+		gBURFrb2.setOnAction(e -> {});
+		gBURFrb3.setOnAction(e -> {});
+		
+		gBUFBrb1.setOnAction(e -> {});
+		gBUFBrb2.setOnAction(e -> {});
+		gBUFBrb3.setOnAction(e -> {	});
+		
+		gBUSDrb1.setOnAction(e -> {});
+		gBUSDrb2.setOnAction(e -> {});
+		gBUSDrb3.setOnAction(e -> {});
+		
+		gBUHrb1.setOnAction(e -> {});
+		gBUHrb2.setOnAction(e -> {});
+		gBUHrb3.setOnAction(e -> {});
+		
+		gBUFirb1.setOnAction(e -> {});
+		gBUFirb2.setOnAction(e -> {});
+		gBUFirb3.setOnAction(e -> {});
+		
+		inAccCB.setOnAction(e -> {});
+		
+		fWLRrb1.setOnAction(e -> {});
+		fWLRrb2.setOnAction(e -> {});
+		
+		rANFROrb1.setOnAction(e -> {});
+		rANFROrb2.setOnAction(e -> {});
+		
+		hIWDrb1.setOnAction(e -> {});
+		hIWDrb2.setOnAction(e -> {});
+		
+		kFCEWDrb1.setOnAction(e -> {});
+		kFCEWDrb2.setOnAction(e -> {});
+		
+		oARCrb1.setOnAction(e -> {});
+		oARCrb2.setOnAction(e -> {});
+		
+		hSFPWrb1.setOnAction(e -> {});
+		hSFPWrb2.setOnAction(e -> {});
+		
+		hDGLrb1.setOnAction(e -> {});
+		hDGLrb2.setOnAction(e -> {});
+		
+		aPGQrb1.setOnAction(e -> {});
+		aPGQrb2.setOnAction(e -> {});
+		
+		sDWTrb1.setOnAction(e -> {});
+		sDWTrb2.setOnAction(e -> {});
+		
+		pLRrb1.setOnAction(e -> {});
+		pLRrb2.setOnAction(e -> {});
+		
+		hSRrb1.setOnAction(e -> {});
+		hSRrb2.setOnAction(e -> {});
+		
+		photoTrb1.setOnAction(e -> {});
+		photoTrb2.setOnAction(e -> {});
+				
+		keyCB.setOnAction(e -> {});
+		noAvailCB.setOnAction(e -> {});
 		
 		//send image of GUI to file.
 		btFinish.setOnAction(e -> {
@@ -765,7 +918,7 @@ public class HCRGen extends Application {
 				StackPane printStage = new StackPane();
 				TextArea printTa = new TextArea();
 				printTa.setEditable(false);
-			
+						
 				printTa.appendText("Tong's Fire Extinguisher Sales and Service\t\t\t\t\tInvoice Number: \t" + tfInvoice.getText() + "\n"
 				+ " P.O. Box 135 Elsinore, UT 84724\t\t\t\t\t\t\t" + tfcustName.getText() + "\n"
 				+ " P.O. Box 3101 Cedar City, UT 84721\t\t\t\t\t\t" +  tfcustAdr.getText() + "\n"
@@ -785,7 +938,7 @@ public class HCRGen extends Application {
 				+ "All cleaning is in accordance with the local fire codes and/or NFPA Standard Code #96. This courtesy follow-up report is \nprovided as a free customer service only; it is not a paid consultation. The inspection of the exhaust system is limited to the \npossible need for improved access and cleaning only. Other deficiencies, wether reported or not, are beyond the scope of our \ncleaning crew's knowledge. it is the owner of the exhaust system's responsibility to take appropriate action to modify any \ndeficiencies noted herein or elsewhere.\n"
 				+ "\n"
 				+ "KITCHEN EXHAUST CLEANING SERVICE REPORT\n"
-				+ "Type of Service completed:\t" + "\n"
+				+ "Type of Service completed:\t" + serviceType + "\n"
 				+ "Check in: \t\t\t\t\t\t\t\t\t\t Check Out: " + "\n"
 				+ "1. Key works: \t\t\t\t\t\t\t\t\t\t" + "1. Fans working and left running: " + "\n"
 				+ "2. Fans working propperly: \t\t\t\t\t\t\t" + "2. Roof area near fan rised off: " + "\n"
@@ -806,12 +959,11 @@ public class HCRGen extends Application {
 				+ "Cleaning Technician that performed service: " + techtf.getText() + "\t\t\t\t\t\t Date Completed: " + techDatetf.getText() +"\n"
 				+ "\nClaims of unsatisfactory workmanship must be made within 48 hours. Invoices are subject to an intrest charge of the lesser of \n1.5% per month(18% per year) or the maximum rate allowed by law on any unpaid invoices outstanding after 30 days from date \nof service. The Customer herby waives thier rights of subrogation by thier insurance carrier against Tong's Fire Extinguisher \nunder any fire or liability insurance policy.\n"
 				+ "IN THE EVENT OF DEFAULT, TONG'S FIRE EXTINGUISHER SHALL BE ENTITLED TO RECOVER COST OF COLLECTION, \nINCLUDING REASONABLE ATTORNEY FEES. \nACKNOWLEDGMENT OF KITCHEN CONDITION & KEC SERVICE COMPLETED. BY SIGNING BELOW THE CUSTOMER \nACKNOWLEDGES SERVICE WAS COMPLETED AND THE KITCHEN WAS LEFT CLEAN AND IN SATISFACTORY CONDITION.\n"
-
+				+ keyCB.isSelected()
+				+ "\nCustomer Signature: "
 				
 				);
-				/*				
 
-				*/
 				printStage.getChildren().addAll(printLabel,printTa);
 
 				Scene printScene = new Scene(printStage , 800, 1000);
@@ -820,12 +972,11 @@ public class HCRGen extends Application {
 				printWindow.setTitle("HCRGen Report");
 				printWindow.setScene(printScene);
 				
-				printWindow.setX(100);
-				printWindow.setY(100);
+				printWindow.setX(0);
+				printWindow.setY(0);
 				
 				printWindow.show();
-			//}
-
+			
 		});
 		
 		btPrint.setOnAction(e -> {
@@ -839,18 +990,7 @@ public class HCRGen extends Application {
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-			
 		});
-		
-		CheckBox keyCB = new CheckBox("Key ");
-		CheckBox noAvailCB = new CheckBox("No one available to sign ");
-		
-		hb8.getChildren().addAll(keyCB, noAvailCB);
-		hb11.getChildren().addAll(custSignLabel,custSigntf);
-		
-		vb5.getChildren().addAll(claimLabel, eventLabel, hb8, ackLabel, hb11);
-		
-		hb7.getChildren().addAll(vb4, vb5);
 		
 	/* END */
 		
@@ -865,7 +1005,9 @@ public class HCRGen extends Application {
 		primaryStage.show();
 		
 	}
-	
+	public void setServiceType(String init){
+		serviceType = init;
+	}
 	public void captureScreen(String fileName) throws Exception {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Rectangle screenRectangle = new Rectangle(10, 45, 775, 944);
