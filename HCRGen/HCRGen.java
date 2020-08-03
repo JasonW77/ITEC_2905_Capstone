@@ -3,6 +3,8 @@ package HCRGen;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.text.Font;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,6 +25,7 @@ import javafx.geometry.Pos;
 import java.util.*;
 import javafx.scene.layout.StackPane;
 import java.awt.ActiveEvent;
+import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
 import java.io.FileInputStream;
@@ -791,7 +794,7 @@ public class HCRGen extends Application {
 		techDatetf.setFont(new Font("Cambria", 10));
 		TextField custSigntf = new TextField();
 		custSigntf.setFont(new Font("Cambria", 10));
-		Button btFinish = new Button("Submit");
+		Button btPreView = new Button("Preview");
 		Button btPrint = new Button("Print");
 		
 		CheckBox keyCB = new CheckBox("Key ");
@@ -805,7 +808,7 @@ public class HCRGen extends Application {
 		hb10.getChildren().addAll(techSigDate, techDatetf);
 		hb11.getChildren().addAll(custSignLabel,custSigntf);
 		
-		vb4.getChildren().addAll(miscNotLabel, miscNotTa, hb9, hb10, btFinish, btPrint);
+		vb4.getChildren().addAll(miscNotLabel, miscNotTa, hb9, hb10, btPreView/*, btPrint*/);
 		vb5.getChildren().addAll(claimLabel, eventLabel, hb8, ackLabel, hb11);
 		
 		//OnAction events for radio buttons and checkboxes
@@ -898,10 +901,14 @@ public class HCRGen extends Application {
 		noAvailCB.setOnAction(e -> {});
 		
 		//send image of GUI to file.
-		btFinish.setOnAction(e -> {
-				Label printLabel = new Label("HCRGen Report");
+		btPreView.setOnAction(e -> {
+				Label printLabel = new Label("HCRGen Preview");
 				
 				StackPane printStage = new StackPane();
+				StackPane printBtStage = new StackPane();
+				
+				Button cancel = new Button("Close Preview");
+				
 				TextArea printTa = new TextArea();
 				printTa.setEditable(false);
 						
@@ -949,20 +956,59 @@ public class HCRGen extends Application {
 				+ "\nCustomer Signature: "
 				
 				);
-
+				
+				HBox printHBox = new HBox();
+				
+				printHBox.getChildren().addAll(btPrint,cancel);
 				printStage.getChildren().addAll(printLabel,printTa);
+				printBtStage.getChildren().addAll(printHBox);
 
 				Scene printScene = new Scene(printStage , 800, 1000);
+				Scene printBtScene = new Scene(printBtStage , 200, 50);
 				
 				Stage printWindow = new Stage();
+				Stage printBtWindow = new Stage();
+				
 				printWindow.setTitle("HCRGen Report");
 				printWindow.setScene(printScene);
 				
 				printWindow.setX(0);
 				printWindow.setY(0);
 				
+				printBtWindow.setTitle("Print/Cancel");
+				printBtWindow.setScene(printBtScene);
+				
+				printBtWindow.setX(900);
+				printBtWindow.setY(100);
+				
 				printWindow.show();
-			
+				printBtWindow.show();
+				
+				cancel.setOnAction(ex -> {
+					printWindow.close();	
+					printBtWindow.close();	
+				});
+				
+				printTa.setOnKeyPressed(ex -> {
+					if (ex.getCode().equals(KeyCode.ENTER)) {
+						try (
+							FileOutputStream oos = new FileOutputStream("Tongs_Report", true);
+							){
+							captureScreen("Tongs_Report");
+							System.out.println("Image saved to file!");
+							
+						} catch (Exception exe) {
+							exe.printStackTrace();
+						}
+					}
+					else if (ex.getCode().equals(KeyCode.ESCAPE)) {
+						printWindow.close();	
+						printBtWindow.close();
+					}	
+					
+					//printWindow.close();	
+					//printBtWindow.close();	
+				});
 		});
 		
 		btPrint.setOnAction(e -> {
