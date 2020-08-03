@@ -963,7 +963,7 @@ public class HCRGen extends Application {
 				printStage.getChildren().addAll(printLabel,printTa);
 				printBtStage.getChildren().addAll(printHBox);
 
-				Scene printScene = new Scene(printStage , 800, 1000);
+				Scene printScene = new Scene(printStage , 810, 1000);
 				Scene printBtScene = new Scene(printBtStage , 200, 50);
 				
 				Stage printWindow = new Stage();
@@ -992,9 +992,9 @@ public class HCRGen extends Application {
 				printTa.setOnKeyPressed(ex -> {
 					if (ex.getCode().equals(KeyCode.ENTER)) {
 						try (
-							FileOutputStream oos = new FileOutputStream("Tongs_Report", true);
+							FileOutputStream oos = new FileOutputStream("Reports/" + tfcustName.getText() + tfInvoice.getText(), true);
 							){
-							captureScreen("Tongs_Report");
+							captureScreen("Reports/" + tfcustName.getText() + tfInvoice.getText());
 							System.out.println("Image saved to file!");
 							
 						} catch (Exception exe) {
@@ -1014,9 +1014,9 @@ public class HCRGen extends Application {
 		btPrint.setOnAction(e -> {
 			
 			try (
-				FileOutputStream oos = new FileOutputStream("Tongs_Report", true);
+				FileOutputStream oos = new FileOutputStream("Reports/" + tfcustName.getText() + tfInvoice.getText(), true);
 				){
-				captureScreen("Tongs_Report");
+				captureScreen("Reports/" + tfcustName.getText() + tfInvoice.getText());
 				System.out.println("Image saved to file!");
 				
 			} catch (Exception ex) {
@@ -1133,7 +1133,7 @@ public class HCRGen extends Application {
 	
 	public void captureScreen(String fileName) throws Exception {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		Rectangle screenRectangle = new Rectangle(10, 45, 775, 944);
+		Rectangle screenRectangle = new Rectangle(1, 45, 800, 950);
 		Robot robot = new Robot();
 		BufferedImage image = robot.createScreenCapture(screenRectangle);
 		ImageIO.write(image, "png", new File(fileName));
