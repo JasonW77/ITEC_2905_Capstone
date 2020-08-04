@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.control.ScrollPane;
@@ -188,17 +189,22 @@ public class HCRGen extends Application {
 		headPane.setGridLinesVisible(false);
 		
 		//create ImageView for logo and place in the grid
+		File f = new File("TONGS-FIRE-EXTINGUISHER-SALES-AND-SERVICE.jpg");
+		String filLoc = f.getAbsolutePath();
+		
 		//Creating a Label
 		Label logo = new Label();
+		Label reportLogo = new Label();
 		
 		//Creating a graphic
-		Image img = new Image(new FileInputStream("/Users/student/Desktop/ITEC_2905_Capstone-Master/HCRGen/TONGS FIRE EXTINGUISHER SALES AND SERVICE/TONGS-FIRE-EXTINGUISHER-SALES-AND-SERVICE.jpg"));
+		Image img = new Image(new FileInputStream(filLoc));
 		ImageView view = new ImageView(img);
 		view.setFitHeight(125);
 		view.setFitWidth(225);
 		view.setPreserveRatio(false);
 		
 		logo.setGraphic(view);
+		reportLogo.setGraphic(view);
 
 		//create address box labels for Tong's Fire Extinguisher Sales and Service
 		Label tongAdr1 = new Label(address1);
@@ -788,8 +794,9 @@ public class HCRGen extends Application {
 		miscNotTa.setWrapText(true);
 		miscNotTa.setMaxWidth(375);
 
-		TextField techtf = new TextField();
-		techtf.setFont(new Font("Cambria", 10));
+		ComboBox techtf = new ComboBox();
+		techtf.getItems().addAll("Scott", "Dustin");
+		
 		TextField techDatetf = new TextField();
 		techDatetf.setFont(new Font("Cambria", 10));
 		TextField custSigntf = new TextField();
@@ -949,7 +956,7 @@ public class HCRGen extends Application {
 				+ "Time In:\t" + tfTI.getText()+ " \t\t\t\t\t\t\t\tTime Out:\t" + tfTO.getText()+ "\n"
 				+ "Miscellaneous Notes:\n"
 				+ miscNotTa.getText() + "\n"
-				+ "Cleaning Technician that performed service: " + techtf.getText() + "\t\t\t\t\t\t Date Completed: " + techDatetf.getText() +"\n"
+				+ "Cleaning Technician that performed service: " + techtf.getValue() + "\t\t\t\t\t\t Date Completed: " + techDatetf.getText() +"\n"
 				+ "\nClaims of unsatisfactory workmanship must be made within 48 hours. Invoices are subject to an intrest charge of the lesser of \n1.5% per month(18% per year) or the maximum rate allowed by law on any unpaid invoices outstanding after 30 days from date \nof service. The Customer herby waives thier rights of subrogation by thier insurance carrier against Tong's Fire Extinguisher \nunder any fire or liability insurance policy.\n"
 				+ "IN THE EVENT OF DEFAULT, TONG'S FIRE EXTINGUISHER SHALL BE ENTITLED TO RECOVER COST OF COLLECTION, \nINCLUDING REASONABLE ATTORNEY FEES. \nACKNOWLEDGMENT OF KITCHEN CONDITION & KEC SERVICE COMPLETED. BY SIGNING BELOW THE CUSTOMER \nACKNOWLEDGES SERVICE WAS COMPLETED AND THE KITCHEN WAS LEFT CLEAN AND IN SATISFACTORY CONDITION.\n"
 				+ keyCB.isSelected()
@@ -1005,9 +1012,7 @@ public class HCRGen extends Application {
 						printWindow.close();	
 						printBtWindow.close();
 					}	
-					
-					//printWindow.close();	
-					//printBtWindow.close();	
+	
 				});
 		});
 		
