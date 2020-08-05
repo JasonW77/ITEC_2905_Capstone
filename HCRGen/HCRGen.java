@@ -25,6 +25,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import java.util.*;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.AnchorPane;
 import java.awt.ActiveEvent;
 import java.awt.event.*;
 import javax.swing.*;
@@ -202,9 +203,13 @@ public class HCRGen extends Application {
 		view.setFitHeight(125);
 		view.setFitWidth(225);
 		view.setPreserveRatio(false);
+		ImageView view2 = new ImageView(img);
+		view2.setFitHeight(125);
+		view2.setFitWidth(225);
+		view2.setPreserveRatio(false);
 		
 		logo.setGraphic(view);
-		reportLogo.setGraphic(view);
+		reportLogo.setGraphic(view2);
 
 		//create address box labels for Tong's Fire Extinguisher Sales and Service
 		Label tongAdr1 = new Label(address1);
@@ -221,7 +226,7 @@ public class HCRGen extends Application {
 		invVBox.setAlignment(Pos.TOP_LEFT);
 		
 		Label invRefNum = new Label(" Invoice Reference #");
-		TextField tfInvoice = new TextField("fake number");
+		TextField tfInvoice = new TextField("Invoice number");
 		tfInvoice.setFont(new Font("Cambria", 10));
 		invVBox.getChildren().addAll(invRefNum, tfInvoice);
 		
@@ -248,22 +253,22 @@ public class HCRGen extends Application {
 		Label servLabel6 = new Label(" Next Service Due: ");
 		Label servLabel8 = new Label(" ");
 		
-		TextField tfServ1 = new TextField("Fake Name 1");
+		TextField tfServ1 = new TextField("tfServ1");
 		tfServ1.setMinWidth(205);
 		tfServ1.setFont(new Font("Cambria", 10));
-		TextField tfServ2 = new TextField("Fake Name 2");
+		TextField tfServ2 = new TextField("tfServ 2");
 		tfServ2.setFont(new Font("Cambria", 10));
 		tfServ2.setMaxWidth(275);
-		TextField tfServ3 = new TextField("Fake Date 1");
+		TextField tfServ3 = new TextField();
 		tfServ3.setFont(new Font("Cambria", 10));
 		tfServ3.setMaxWidth(75);
-		TextField tfServ4 = new TextField("Fake Date 2");
+		TextField tfServ4 = new TextField();
 		tfServ4.setFont(new Font("Cambria", 10));
 		tfServ4.setMaxWidth(75);
-		TextField tfServ5 = new TextField("Fake Time");
+		TextField tfServ5 = new TextField();
 		tfServ5.setFont(new Font("Cambria", 10));
 		tfServ5.setMaxWidth(75);
-		TextField tfServ6 = new TextField("Fake Date 3");
+		TextField tfServ6 = new TextField();
 		tfServ6.setFont(new Font("Cambria", 10));
 		tfServ6.setMaxWidth(75);
 		
@@ -300,22 +305,22 @@ public class HCRGen extends Application {
 		Label custAdrStateLabel = new Label(" State: ");
 		Label custAdrZipLabel = new Label(" Zip: ");
 		
-		TextField tfcustPhone = new TextField("Fake Phone Number");
+		TextField tfcustPhone = new TextField("Phone Number");
 		tfcustPhone.setFont(new Font("Cambria", 10));
 		tfcustPhone.setMaxWidth(115);
-		TextField tfcustName = new TextField("Fake Name 1");
+		TextField tfcustName = new TextField("tfcustName");
 		tfcustName.setFont(new Font("Cambria", 10));
 		tfcustName.setMinWidth(205);
-		TextField tfcustAdr = new TextField("Fake address");
+		TextField tfcustAdr = new TextField("Address");
 		tfcustAdr.setFont(new Font("Cambria", 10));
 		tfcustAdr.setMaxWidth(275);
-		TextField tfcustAdrCity = new TextField("Fake City");
+		TextField tfcustAdrCity = new TextField("City");
 		tfcustAdrCity.setFont(new Font("Cambria", 10));
 		tfcustAdrCity.setMaxWidth(115);
-		TextField tfcustAdrState = new TextField("Fake State");
+		TextField tfcustAdrState = new TextField("Utah");
 		tfcustAdrState.setFont(new Font("Cambria", 10));
 		tfcustAdrState.setMaxWidth(115);
-		TextField tfcustAdrZip = new TextField("Fake Zipcode");
+		TextField tfcustAdrZip = new TextField("Zipcode");
 		tfcustAdrZip.setFont(new Font("Cambria", 10));
 		tfcustAdrZip.setMaxWidth(115);
 		
@@ -349,7 +354,7 @@ public class HCRGen extends Application {
 	*/
 		
 		//Create cleaning notes text rea and label
-		TextArea taServ1 = new TextArea("Fake cleaning Notes");
+		TextArea taServ1 = new TextArea();
 		taServ1.setPrefHeight(50);
 		taServ1.setMaxWidth(750);
 
@@ -757,10 +762,10 @@ public class HCRGen extends Application {
 		Label tILabel = new Label("TIME IN: ");
 		Label tOLabel = new Label("TIME OUT: ");
 		
-		TextField tfTI = new TextField("Fake Time in");
+		TextField tfTI = new TextField();
 		tfTI.setFont(new Font("Cambria", 10));
 		tfTI.setMaxWidth(80);
-		TextField tfTO = new TextField("Fake Time out");
+		TextField tfTO = new TextField();
 		tfTO.setFont(new Font("Cambria", 10));
 		tfTO.setMaxWidth(80);
 		
@@ -789,7 +794,7 @@ public class HCRGen extends Application {
 		ackLabel.setMaxWidth(375);
 		Label custSignLabel = new Label("Customer Name: ");
 		
-		TextArea miscNotTa = new TextArea("Fake Misc notes");
+		TextArea miscNotTa = new TextArea();
 		miscNotTa.setFont(new Font("Cambria", 10));
 		miscNotTa.setWrapText(true);
 		miscNotTa.setMaxWidth(375);
@@ -911,20 +916,30 @@ public class HCRGen extends Application {
 		btPreView.setOnAction(e -> {
 				Label printLabel = new Label("HCRGen Preview");
 				
-				StackPane printStage = new StackPane();
 				StackPane printBtStage = new StackPane();
 				
 				Button cancel = new Button("Close Preview");
 				
 				TextArea printTa = new TextArea();
+				printTa.setMinHeight(1000);
+				printTa.setMinWidth(810);
 				printTa.setEditable(false);
-						
-				printTa.appendText("Tong's Fire Extinguisher Sales and Service\t\t\t\t\tInvoice Number: \t" + tfInvoice.getText() + "\n"
-				+ " P.O. Box 135 Elsinore, UT 84724\t\t\t\t\t\t\t" + tfcustName.getText() + "\n"
-				+ " P.O. Box 3101 Cedar City, UT 84721\t\t\t\t\t\t" +  tfcustAdr.getText() + "\n"
-				+ " (435) 201-2182\t\t\t\t\t\t\t\t\t\t" + tfcustAdrCity.getText() + ", " + tfcustAdrState.getText() + ", " +tfcustAdrZip.getText()+ "\n"
-				+ "Lic. #'s KE82431, "+ "KE113954\t\t\t\t\t\t\t\t" + tfcustPhone.getText() + "\n" 
-				+ "\n"
+				
+				AnchorPane printStage = new AnchorPane(printTa,reportLogo);
+
+				printStage.setTopAnchor(reportLogo,10.0);
+				printStage.setLeftAnchor(reportLogo,0.0);
+				printStage.setTopAnchor(printTa,0.0);
+				printStage.setLeftAnchor(printTa,0.0);
+
+				
+				
+				printTa.appendText("                                                              Tong's Fire Extinguisher Sales and Service                       Invoice Number: " + tfInvoice.getText() + "\n"
+				+ "                                                              P.O. Box 135 Elsinore, UT 84724                                       " + tfcustName.getText() + "\n"
+				+ "                                                              P.O. Box 3101 Cedar City, UT 84721                                 " +  tfcustAdr.getText() + "\n"
+				+ "                                                              (435) 201-2182                                                                   " + tfcustAdrCity.getText() + ", " + tfcustAdrState.getText() + ", " +tfcustAdrZip.getText()+ "\n"
+				+ "                                                              Lic. #" + "                                                                                    " + tfcustPhone.getText() + "\n" 
+				+ "\n" + "\n" + "\n"
 				+ " Service Scheduled with:\t" + tfServ1.getText() + "\n"
 				+ " Store Closing Manager:\t" + tfServ2.getText()+ "\n"
 				+ " Date of Service:\t\t\t" + tfServ3.getText()+ "\n"
@@ -967,7 +982,7 @@ public class HCRGen extends Application {
 				HBox printHBox = new HBox();
 				
 				printHBox.getChildren().addAll(btPrint,cancel);
-				printStage.getChildren().addAll(printLabel,printTa);
+				//printStage.getChildren().addAll(printLabel,printTa,reportLogo);
 				printBtStage.getChildren().addAll(printHBox);
 
 				Scene printScene = new Scene(printStage , 810, 1000);
