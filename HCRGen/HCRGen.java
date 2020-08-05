@@ -51,7 +51,9 @@ public class HCRGen extends Application {
 	String address1 = " P.O. Box 135 \n Elsinore, UT 84724";
 	String address2 = " P.O. Box 3101 \n Cedar City, UT 84721";
 	String phoneNum = " (435) 201-2182";
-	String serviceType = "N/A";
+	String serviceInit = "";
+	String serviceReg = "";
+	String serviceInsp = "";
 	String dkWSt = "N/A";
 	String fWPSt = "N/A";
 	String dIFSt = "N/A";
@@ -262,9 +264,10 @@ public class HCRGen extends Application {
 		TextField tfServ3 = new TextField();
 		tfServ3.setFont(new Font("Cambria", 10));
 		tfServ3.setMaxWidth(75);
-		TextField tfServ4 = new TextField();
-		tfServ4.setFont(new Font("Cambria", 10));
-		tfServ4.setMaxWidth(75);
+		
+		ComboBox tfServ4 = new ComboBox();
+		tfServ4.getItems().addAll("Anually", "Bi-Anually", "Quarterly");
+		
 		TextField tfServ5 = new TextField();
 		tfServ5.setFont(new Font("Cambria", 10));
 		tfServ5.setMaxWidth(75);
@@ -383,14 +386,9 @@ public class HCRGen extends Application {
 		//Create the kitchen cleaning service report boxes and place them in the grid
 		Label kECSRLabel = new Label("KITCHEN EXHAUST CLEANING SERVICE REPORT");
 		
-		ToggleGroup kECSR = new ToggleGroup();
 		RadioButton iScb = new RadioButton("INITIAL SERVICE ");
-		iScb.setToggleGroup(kECSR);
 		RadioButton rScb = new RadioButton("REGULAR SERVICE ");
-		rScb.setToggleGroup(kECSR);
 		RadioButton iNcb = new RadioButton("INSPECTION ");
-		iNcb.setToggleGroup(kECSR);
-		
 		
 		hb4.getChildren().addAll(iScb, rScb, iNcb);
 		
@@ -905,9 +903,33 @@ public class HCRGen extends Application {
 		photoTrb1.setOnAction(e -> {setYes(photoTSt, "photoTrb1"); });
 		photoTrb2.setOnAction(e -> {setNo(photoTSt, "photoTrb2"); });
 				
-		iScb.setOnAction(e -> {setServiceType("Initial Service");});
-		rScb.setOnAction(e -> {setServiceType("Regular Service");});
-		iNcb.setOnAction(e -> {setServiceType("Inspection");});
+		iScb.setOnAction(e -> {
+			if (iScb.isSelected() == true) {
+				serviceInit = "YES";
+			}
+			else if (iScb.isSelected() == false) {
+				serviceInit = "NO";
+			}
+		});
+		
+		rScb.setOnAction(e -> {
+			if (rScb.isSelected() == true) {
+				serviceReg = "YES";
+			}
+			else if (rScb.isSelected() == false) {
+				serviceReg = "NO";
+			}
+		});
+		
+		iNcb.setOnAction(e -> {
+			if (iNcb.isSelected() == true) {
+				serviceInsp = "YES";
+			}
+			else if (iNcb.isSelected() == false) {
+				serviceInsp = "NO";
+			}
+		});
+		
 		inAccCB.setOnAction(e -> {});		
 		keyCB.setOnAction(e -> {});
 		noAvailCB.setOnAction(e -> {});
@@ -943,17 +965,17 @@ public class HCRGen extends Application {
 				+ " Service Scheduled with:\t" + tfServ1.getText() + "\n"
 				+ " Store Closing Manager:\t" + tfServ2.getText()+ "\n"
 				+ " Date of Service:\t\t\t" + tfServ3.getText()+ "\n"
-				+ " Service Every:\t\t\t" + tfServ4.getText()+ "\n"
+				+ " Service Every:\t\t\t" + tfServ4.getValue()+ "\n"
 				+ " Time of Service:\t\t\t" + tfServ5.getText()+ "\n"
 				+ " Next Service Due:\t\t\t" + tfServ6.getText()+ "\n"
 				+ "\n"
-				+ "Notes to cleaning Technicians:\n"
+				+ "Notes to cleaning Technicians:"
 				+ taServ1.getText() + "\n"
 				+ "\n"
 				+ "All cleaning is in accordance with the local fire codes and/or NFPA Standard Code #96. This courtesy follow-up report is \nprovided as a free customer service only; it is not a paid consultation. The inspection of the exhaust system is limited to the \npossible need for improved access and cleaning only. Other deficiencies, wether reported or not, are beyond the scope of our \ncleaning crew's knowledge. it is the owner of the exhaust system's responsibility to take appropriate action to modify any \ndeficiencies noted herein or elsewhere.\n"
 				+ "\n"
-				+ "KITCHEN EXHAUST CLEANING SERVICE REPORT\n"
-				+ "Type of Service completed:\t" + serviceType + "\n"
+				+ "         KITCHEN EXHAUST CLEANING SERVICE REPORT\n"
+				+ "Type of Service completed - Initial Service: " + serviceInit + "                 Regular Service: " + serviceReg + "                Inspection: " + serviceInsp + "\n"
 				+ "Check in: \t\t\t\t\t\t\t\t\t\t Check Out: " + "\n"
 				+ "1. Key works: \t\t\t\t\t\t\t" + dkWSt + "\t\t\t" + "1. Fans working and left running:\t\t\t\t " + fWLRSt +"\n"
 				+ "2. Fans working propperly: \t\t\t\t" + fWPSt + "\t\t\t" + "2. Roof area near fan rised off:\t\t\t\t " + rANFROSt +"\n"
@@ -967,11 +989,13 @@ public class HCRGen extends Application {
 				+ "10. Grease build up on fan blades: \t\t" + gBUFBSt + "\t\t\t" + "10. Pilot lights reignited:\t\t\t\t\t " + pLRSt + "\n"
 				+ "11. Grease build up on Stacks/Ductwork: \t" + gBUSDSt + "\t\t\t" + "11. Photos taken:\t\t\t\t\t\t\t " + photoTSt + "\n"
 				+ "12. Grease build up on Hoods: \t\t\t" + gBUHSt + "\t\t\t" + "12. Hood Sticker replaced:\t\t\t\t\t " + hSRSt + "\n"
-				+ "13. Grease build up on Filter: \t\t\t" + gBUFiSt + "\t\t\t" + "Inaccessible areas?:\t\t\t\t " + inAccCBSt + "\n"
-				+ "Time In:\t" + tfTI.getText()+ " \t\t\t\t\t\t\t\tTime Out:\t" + tfTO.getText()+ "\n"
+				+ "13. Grease build up on Filter: \t\t\t" + gBUFiSt + "\t\t\t" + "Inaccessible areas?:\t\t\t\t " + inAccCBSt + "\n" + "\n"
+
+				+ "Cleaning Technician that performed service: " + techtf.getValue() +"\n"
+				+ "Date Completed: " + techDatetf.getText() 
+				+ "                  Time In: " + tfTI.getText()+ "                  Time Out: " + tfTO.getText()+ "\n"+ "\n"
 				+ "Miscellaneous Notes:\n"
 				+ miscNotTa.getText() + "\n"
-				+ "Cleaning Technician that performed service: " + techtf.getValue() + "\t\t\t\t\t\t Date Completed: " + techDatetf.getText() +"\n"
 				+ "\nClaims of unsatisfactory workmanship must be made within 48 hours. Invoices are subject to an intrest charge of the lesser of \n1.5% per month(18% per year) or the maximum rate allowed by law on any unpaid invoices outstanding after 30 days from date \nof service. The Customer herby waives thier rights of subrogation by thier insurance carrier against Tong's Fire Extinguisher \nunder any fire or liability insurance policy.\n"
 				+ "IN THE EVENT OF DEFAULT, TONG'S FIRE EXTINGUISHER SHALL BE ENTITLED TO RECOVER COST OF COLLECTION, \nINCLUDING REASONABLE ATTORNEY FEES. \nACKNOWLEDGMENT OF KITCHEN CONDITION & KEC SERVICE COMPLETED. BY SIGNING BELOW THE CUSTOMER \nACKNOWLEDGES SERVICE WAS COMPLETED AND THE KITCHEN WAS LEFT CLEAN AND IN SATISFACTORY CONDITION.\n"
 				+ keyCB.isSelected()
@@ -1014,9 +1038,9 @@ public class HCRGen extends Application {
 				printTa.setOnKeyPressed(ex -> {
 					if (ex.getCode().equals(KeyCode.ENTER)) {
 						try (
-							FileOutputStream oos = new FileOutputStream("Reports/" + tfcustName.getText() + tfInvoice.getText(), true);
+							FileOutputStream oos = new FileOutputStream("Reports/" + tfcustName.getText() + tfInvoice.getText() + ".jpg", true);
 							){
-							captureScreen("Reports/" + tfcustName.getText() + tfInvoice.getText());
+							captureScreen("Reports/" + tfcustName.getText() + tfInvoice.getText() + ".jpg");
 							System.out.println("Image saved to file!");
 							
 						} catch (Exception exe) {
@@ -1034,9 +1058,9 @@ public class HCRGen extends Application {
 		btPrint.setOnAction(e -> {
 			
 			try (
-				FileOutputStream oos = new FileOutputStream("Reports/" + tfcustName.getText() + tfInvoice.getText(), true);
+				FileOutputStream oos = new FileOutputStream("Reports/" + tfcustName.getText() + tfInvoice.getText()+ ".jpg", true);
 				){
-				captureScreen("Reports/" + tfcustName.getText() + tfInvoice.getText());
+				captureScreen("Reports/" + tfcustName.getText() + tfInvoice.getText()+ ".jpg");
 				System.out.println("Image saved to file!");
 				
 			} catch (Exception ex) {
@@ -1055,9 +1079,9 @@ public class HCRGen extends Application {
 		primaryStage.show();
 		
 	}
-	public void setServiceType(String init){
+	/*public void setServiceType(String init){
 		serviceType = init;
-	}
+	}*/
 	
 	public void setYes(String input, String btName){
 		switch (btName){
