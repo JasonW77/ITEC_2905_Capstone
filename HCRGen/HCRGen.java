@@ -3,7 +3,6 @@ package HCRGen;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Font;
 import javafx.scene.image.Image;
@@ -23,29 +22,21 @@ import javafx.scene.layout.Priority;
 import javafx.scene.control.ScrollPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import java.util.*;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.AnchorPane;
-import java.awt.ActiveEvent;
-import java.awt.event.*;
-import javax.swing.*;
 import java.io.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.security.acl.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
 import java.awt.Rectangle;
 import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.Dimension;
-import java.awt.*;
 
 
 
 public class HCRGen extends Application {
 	// Tong's Fire Extinguisher Sales and Service Information
-	//String licenceNum = " Lic. # KE82431 & KE113954";
+	//String licenceNum = " License. # KE82431 & KE113954";
 	String licNumTech1 = " Lic. # KE82431";
 	String licNumTech2 = " Lic. # KE113954";
 	String address1 = " P.O. Box 135 \n Elsinore, UT 84724";
@@ -85,17 +76,17 @@ public class HCRGen extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException{
-		//Create a main page VBox and set its atributes
+		//Create a main page VBox and set its attributes
 		ScrollPane sp = new ScrollPane();
 		VBox mainVB = new VBox();
-		mainVB.setVgrow(sp, Priority.ALWAYS);
+		VBox.setVgrow(sp, Priority.ALWAYS);
 		sp.setContent(mainVB);
 
 		mainVB.setMinSize(400, 400);
 		mainVB.setPadding(new Insets(10,10,10,10));
 		mainVB.setAlignment(Pos.TOP_CENTER);
 
-		//Create the main page HBoxs, VBoxs and set thier atributes
+		//Create the main page HBoxs, VBoxs and set their attributes
 		HBox hb1 = new HBox();
 		hb1.setAlignment(Pos.TOP_CENTER);
 		hb1.setPadding(new Insets(10,10,10,10));
@@ -178,11 +169,11 @@ public class HCRGen extends Application {
 	/*
 	Items that go in hb1 go here
 		~ Imageview of logo
-		~ Buiseness Info
+		~ Business Info
 		~ Invoice box
 	*/
 		
-		//create GridPane for the logo, buissness information and invoice Box
+		//create GridPane for the logo, business information and invoice Box
 		GridPane headPane = new GridPane();
 		headPane.setMinSize(200, 100);
 		headPane.setPadding(new Insets(10,10,10,10));
@@ -220,7 +211,7 @@ public class HCRGen extends Application {
 		Label tongLicNum1 = new Label(licNumTech1);
 		Label tongLicNum2 = new Label(licNumTech2);
 		
-		//Create Address VBox for Tong's Fire Extinguisher Sales and Serviceinformation
+		//Create Address VBox for Tong's Fire Extinguisher Sales and Service information
 		vb1.getChildren().addAll(tongAdr1, tongAdr2, tongPhone, tongLicNum1, tongLicNum2);
 		
 		//Create Invoice HBox and place it in the pane
@@ -246,15 +237,13 @@ public class HCRGen extends Application {
 		~ Customer Info Box
 	*/
 	
-		//Create Service Scedule Information box
+		//Create Service Schedule Information box
 		Label servLabel1 = new Label(" Service Scheduled with: ");
 		Label servLabel2 = new Label(" Store Closing Manager: ");
 		Label servLabel3 = new Label(" Date of Service: ");
 		Label servLabel4 = new Label(" Service Every ");
 		Label servLabel5 = new Label(" Time of Service: ");
 		Label servLabel6 = new Label(" Next Service Due: ");
-		Label servLabel8 = new Label(" ");
-		
 		TextField tfServ1 = new TextField("tfServ1");
 		tfServ1.setMinWidth(205);
 		tfServ1.setFont(new Font("Cambria", 10));
@@ -265,7 +254,7 @@ public class HCRGen extends Application {
 		tfServ3.setFont(new Font("Cambria", 10));
 		tfServ3.setMaxWidth(75);
 		
-		ComboBox tfServ4 = new ComboBox();
+		ComboBox<String> tfServ4 = new ComboBox<String>();
 		tfServ4.getItems().addAll("Anually", "Bi-Anually", "Quarterly");
 		
 		TextField tfServ5 = new TextField();
@@ -294,13 +283,6 @@ public class HCRGen extends Application {
 		servGrid.setAlignment(Pos.TOP_LEFT);
 		
 		//Create Second row of boxes for Customer information and place them on the grid
-		String custPhone = "";
-		String clientName = "";
-		String custAddress = "";
-		String custCity = "";
-		String custState = "";
-		String custZip = "";
-		
 		Label custPhoneLabel = new Label(" Phone: ");
 		Label custNameLabel = new Label(" Client: ");
 		Label custAdrLabel = new Label(" Address: ");
@@ -352,11 +334,11 @@ public class HCRGen extends Application {
 		
 	/*
 	Items that go in vb2 go here
-		~ Notes to technitians *servLabel7*
+		~ Notes to technicians *servLabel7*
 		~ TextArea *taServ1*
 	*/
 		
-		//Create cleaning notes text rea and label
+		//Create cleaning notes text area and label
 		TextArea taServ1 = new TextArea();
 		taServ1.setPrefHeight(50);
 		taServ1.setMaxWidth(750);
@@ -606,91 +588,79 @@ public class HCRGen extends Application {
 
 		CheckBox inAccCB = new CheckBox("INACESSIBLE AREAS AND/OR FIRE CODE VIOLATIONS EXIST");
 		inAccCB.setFont(new Font("Cambria", 10));
-		//String inAccCBSt = "";
+		
 		
 		ToggleGroup fWLR = new ToggleGroup();
 		RadioButton fWLRrb1 = new RadioButton();
 		fWLRrb1.setToggleGroup(fWLR);
 		RadioButton fWLRrb2 = new RadioButton();
 		fWLRrb2.setToggleGroup(fWLR);
-		//String fWLRSt = "";
-		
+	
 		ToggleGroup rANFRO = new ToggleGroup();
 		RadioButton rANFROrb1 = new RadioButton();
 		rANFROrb1.setToggleGroup(rANFRO);
 		RadioButton rANFROrb2 = new RadioButton();
 		rANFROrb2.setToggleGroup(rANFRO);
-		//String rANFROSt = "";
-		
+	
 		ToggleGroup hIWD = new ToggleGroup();
 		RadioButton hIWDrb1 = new RadioButton();
 		hIWDrb1.setToggleGroup(hIWD);
 		RadioButton hIWDrb2 = new RadioButton();
 		hIWDrb2.setToggleGroup(hIWD);
-		//String hIWDSt = "";
 		
 		ToggleGroup kFCEWD = new ToggleGroup();
 		RadioButton kFCEWDrb1 = new RadioButton();
 		kFCEWDrb1.setToggleGroup(kFCEWD);
 		RadioButton kFCEWDrb2 = new RadioButton();
 		kFCEWDrb2.setToggleGroup(kFCEWD);
-		//String kFCEWDSt = "";
 		
 		ToggleGroup oARC = new ToggleGroup();
 		RadioButton oARCrb1 = new RadioButton();
 		oARCrb1.setToggleGroup(oARC);
 		RadioButton oARCrb2 = new RadioButton();
 		oARCrb2.setToggleGroup(oARC);
-		//String oARCSt = "";
-		
+	
 		ToggleGroup hSFPW = new ToggleGroup();
 		RadioButton hSFPWrb1 = new RadioButton();
 		hSFPWrb1.setToggleGroup(hSFPW);
 		RadioButton hSFPWrb2 = new RadioButton();
 		hSFPWrb2.setToggleGroup(hSFPW);
-		//String hSFPWSt = "";
 		
 		ToggleGroup hDGL = new ToggleGroup();
 		RadioButton hDGLrb1 = new RadioButton();
 		hDGLrb1.setToggleGroup(hDGL);
 		RadioButton hDGLrb2 = new RadioButton();
 		hDGLrb2.setToggleGroup(hDGL);
-		//String hDGLSt = "";
 		
 		ToggleGroup aPGQ = new ToggleGroup();
 		RadioButton aPGQrb1 = new RadioButton();
 		aPGQrb1.setToggleGroup(aPGQ);
 		RadioButton aPGQrb2 = new RadioButton();
 		aPGQrb2.setToggleGroup(aPGQ);
-		//String aPGQSt = "";
 		
 		ToggleGroup sDWT = new ToggleGroup();
 		RadioButton sDWTrb1 = new RadioButton();
 		sDWTrb1.setToggleGroup(sDWT);
 		RadioButton sDWTrb2 = new RadioButton();
 		sDWTrb2.setToggleGroup(sDWT);
-		//String sDWTSt = "";
 		
 		ToggleGroup pLR = new ToggleGroup();
 		RadioButton pLRrb1 = new RadioButton();
 		pLRrb1.setToggleGroup(pLR);
 		RadioButton pLRrb2 = new RadioButton();
 		pLRrb2.setToggleGroup(pLR);
-		//String pLRSt = "";
 		
 		ToggleGroup hSR = new ToggleGroup();
 		RadioButton hSRrb1 = new RadioButton();
 		hSRrb1.setToggleGroup(hSR);
 		RadioButton hSRrb2 = new RadioButton();
 		hSRrb2.setToggleGroup(hSR);
-		//String hSRSt = "";
 		
 		ToggleGroup photoT = new ToggleGroup();
 		RadioButton photoTrb1 = new RadioButton();
 		photoTrb1.setToggleGroup(photoT);
 		RadioButton photoTrb2 = new RadioButton();
 		photoTrb2.setToggleGroup(photoT);
-		//String photoTSt = "";
 		
 		GridPane cOBGrid = new GridPane();
 		cOBGrid.add(checkOutLabel,0,0);
@@ -771,10 +741,10 @@ public class HCRGen extends Application {
 		
 	/*
 	Items that go in hb7 go here
-		~ Misc notes text field
+		~ Miscellaneous notes text field
 		~ Acknowledgement box
 	*/
-		//Create the misc Notes and Acknowledgment Boxes and place them in the grid
+		//Create the miscellaneous Notes and Acknowledgment Boxes and place them in the grid
 		Label miscNotLabel = new Label("Misc. Notes: All Items Marked NO must have an Explaination");
 		Label techSigLabel = new Label("Technician:");
 		Label techSigDate = new Label("Date:    	");
@@ -797,7 +767,7 @@ public class HCRGen extends Application {
 		miscNotTa.setWrapText(true);
 		miscNotTa.setMaxWidth(375);
 
-		ComboBox techtf = new ComboBox();
+		ComboBox<String> techtf = new ComboBox<String>();
 		techtf.getItems().addAll("Scott", "Dustin");
 		
 		TextField techDatetf = new TextField();
@@ -821,7 +791,7 @@ public class HCRGen extends Application {
 		vb4.getChildren().addAll(miscNotLabel, miscNotTa, hb9, hb10, btPreView/*, btPrint*/);
 		vb5.getChildren().addAll(claimLabel, eventLabel, hb8, ackLabel, hb11);
 		
-		//OnAction events for radio buttons and checkboxes
+		//OnAction events for radio buttons and check boxes
 		
 		dKWrb1.setOnAction(e -> {setYes(dkWSt, "dKWrb1"); });
 		dKWrb2.setOnAction(e -> {setNo(dkWSt, "dKWrb2"); });
@@ -936,8 +906,6 @@ public class HCRGen extends Application {
 		
 		//send image of GUI to file.
 		btPreView.setOnAction(e -> {
-				Label printLabel = new Label("HCRGen Preview");
-				
 				StackPane printBtStage = new StackPane();
 				
 				Button cancel = new Button("Close Preview");
@@ -949,10 +917,10 @@ public class HCRGen extends Application {
 				
 				AnchorPane printStage = new AnchorPane(printTa,reportLogo);
 
-				printStage.setTopAnchor(reportLogo,10.0);
-				printStage.setLeftAnchor(reportLogo,0.0);
-				printStage.setTopAnchor(printTa,0.0);
-				printStage.setLeftAnchor(printTa,0.0);
+				AnchorPane.setTopAnchor(reportLogo,10.0);
+				AnchorPane.setLeftAnchor(reportLogo,0.0);
+				AnchorPane.setTopAnchor(printTa,0.0);
+				AnchorPane.setLeftAnchor(printTa,0.0);
 
 				
 				
@@ -1079,9 +1047,7 @@ public class HCRGen extends Application {
 		primaryStage.show();
 		
 	}
-	/*public void setServiceType(String init){
-		serviceType = init;
-	}*/
+
 	
 	public void setYes(String input, String btName){
 		switch (btName){
@@ -1176,13 +1142,12 @@ public class HCRGen extends Application {
 	}
 	
 	public void captureScreen(String fileName) throws Exception {
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Rectangle screenRectangle = new Rectangle(1, 45, 800, 950);
 		Robot robot = new Robot();
 		BufferedImage image = robot.createScreenCapture(screenRectangle);
 		ImageIO.write(image, "png", new File(fileName));
 	}
 	public static void main(String[] args){
-			Application.launch(args);
+			//Application.launch(args);
 		}
 }
