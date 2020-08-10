@@ -1148,6 +1148,6 @@ public class HCRGen extends Application {
 		ImageIO.write(image, "png", new File(fileName));
 	}
 	public static void main(String[] args){
-			//Application.launch(args);
+			launch(args);
 		}
 }
