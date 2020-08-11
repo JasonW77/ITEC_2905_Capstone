@@ -37,10 +37,21 @@ import java.awt.Robot;
 public class HCRGen extends Application {
 	// Tong's Fire Extinguisher Sales and Service Information
 	//String licenceNum = " License. # KE82431 & KE113954";
-	String licNumTech1 = " Lic. # KE82431";
-	String licNumTech2 = " Lic. # KE113954";
-	String address1 = " P.O. Box 135 \n Elsinore, UT 84724";
-	String address2 = " P.O. Box 3101 \n Cedar City, UT 84721";
+	String licNumTech1 = "Lic. # KE82431";
+	String licNumTech2 = "Lic. # KE113954";
+	String address1 = "P.O. Box 3101 \n Cedar City, UT 84721";
+	String address1p = "P.O. Box 3101";
+	String address1c = "Cedar City,";
+	String address1z = "UT 84721";
+	String tech1p = "1-435-201-2182";
+	String address2 = "P.O. Box 135 \n Elsinore, UT 84724";
+	String address2p = "P.O. Box 135";
+	String address2c = "Elsinore,";
+	String address2z = "UT 84724";
+	String tech2p = "1-435-896-3840";	
+	int whichTech = 0;
+	String endTech1 = " ";
+	String endTech1l = " ";
 	String phoneNum = " (435) 201-2182";
 	String serviceInit = "";
 	String serviceReg = "";
@@ -290,10 +301,10 @@ public class HCRGen extends Application {
 		Label custAdrStateLabel = new Label(" State: ");
 		Label custAdrZipLabel = new Label(" Zip: ");
 		
-		TextField tfcustPhone = new TextField("Phone Number");
+		TextField tfcustPhone = new TextField("Phone");
 		tfcustPhone.setFont(new Font("Cambria", 10));
 		tfcustPhone.setMaxWidth(115);
-		TextField tfcustName = new TextField("tfcustName");
+		TextField tfcustName = new TextField("Customer Name");
 		tfcustName.setFont(new Font("Cambria", 10));
 		tfcustName.setMinWidth(205);
 		TextField tfcustAdr = new TextField("Address");
@@ -305,7 +316,7 @@ public class HCRGen extends Application {
 		TextField tfcustAdrState = new TextField("Utah");
 		tfcustAdrState.setFont(new Font("Cambria", 10));
 		tfcustAdrState.setMaxWidth(115);
-		TextField tfcustAdrZip = new TextField("Zipcode");
+		TextField tfcustAdrZip = new TextField("Zip");
 		tfcustAdrZip.setFont(new Font("Cambria", 10));
 		tfcustAdrZip.setMaxWidth(115);
 		
@@ -588,6 +599,8 @@ public class HCRGen extends Application {
 
 		CheckBox inAccCB = new CheckBox("INACESSIBLE AREAS AND/OR FIRE CODE VIOLATIONS EXIST");
 		inAccCB.setFont(new Font("Cambria", 10));
+		CheckBox moreHoods = new CheckBox("Multiple Hoods");
+		moreHoods.setFont(new Font("Cambria", 10));
 		
 		
 		ToggleGroup fWLR = new ToggleGroup();
@@ -720,6 +733,8 @@ public class HCRGen extends Application {
 		
 		cOBGrid.add(inAccCB,0,14);
 		
+		cOBGrid.add(moreHoods,0,15);
+		
 		hb5.getChildren().addAll(cIBGrid, cOBGrid);
 		
 	/*
@@ -768,7 +783,7 @@ public class HCRGen extends Application {
 		miscNotTa.setMaxWidth(375);
 
 		ComboBox<String> techtf = new ComboBox<String>();
-		techtf.getItems().addAll("Scott", "Dustin");
+		techtf.getItems().addAll("Scott", "Dusten");
 		
 		TextField techDatetf = new TextField();
 		techDatetf.setFont(new Font("Cambria", 10));
@@ -900,13 +915,29 @@ public class HCRGen extends Application {
 			}
 		});
 		
+		techtf.setOnAction(e -> {
+			if (techtf.getValue() == "Scott") {
+				endTech1 = "Scott Tong \n" + address1p + "\n" + address1c + address1z + "\n" + tech1p + "\n" + licNumTech1;
+			}
+			else if (techtf.getValue() == "Dusten") {
+				endTech1 = "Dusten Newby \n" + address2p + "\n" + address2c + address2z + "\n" + tech2p + "\n" + licNumTech2;
+				
+			}
+		});
+		
 		inAccCB.setOnAction(e -> {});		
 		keyCB.setOnAction(e -> {});
 		noAvailCB.setOnAction(e -> {});
+		moreHoods.setOnAction(e -> {});
 		
 		//send image of GUI to file.
 		btPreView.setOnAction(e -> {
-				StackPane printBtStage = new StackPane();
+			String custadd1na = tfcustName.getText().trim();
+			String custadd1po = tfcustAdr.getText().trim();
+			String custadd1csz = tfcustAdrCity.getText().trim() + ", " + tfcustAdrState.getText().trim() + ", " +tfcustAdrZip.getText().trim();
+			String custadd1ph = tfcustPhone.getText().trim();
+			
+			StackPane printBtStage = new StackPane();
 				
 				Button cancel = new Button("Close Preview");
 				
@@ -915,21 +946,32 @@ public class HCRGen extends Application {
 				printTa.setMinWidth(810);
 				printTa.setEditable(false);
 				
-				AnchorPane printStage = new AnchorPane(printTa,reportLogo);
+				TextArea techAddta = new TextArea();
+				techAddta.setMaxHeight(125);
+				techAddta.setMaxWidth(300);
+				techAddta.setEditable(false);
+				
+				TextArea custAddta = new TextArea();
+				custAddta.setMaxHeight(125);
+				custAddta.setMaxWidth(300);
+				custAddta.setEditable(false);
+				
+				
+				AnchorPane printStage = new AnchorPane(printTa,reportLogo,techAddta,custAddta);
 
 				AnchorPane.setTopAnchor(reportLogo,10.0);
 				AnchorPane.setLeftAnchor(reportLogo,0.0);
 				AnchorPane.setTopAnchor(printTa,0.0);
 				AnchorPane.setLeftAnchor(printTa,0.0);
+				AnchorPane.setTopAnchor(techAddta,0.0);
+				AnchorPane.setLeftAnchor(techAddta,225.0);
+				AnchorPane.setTopAnchor(custAddta,0.0);
+				AnchorPane.setRightAnchor(custAddta,0.0);
 
+				techAddta.appendText(endTech1);
+				custAddta.appendText("Invoice Number: " + tfInvoice.getText() + "\n" + custadd1na + "\n" + custadd1po + "\n" + custadd1csz + "\n" + custadd1ph);
 				
-				
-				printTa.appendText("                                                              Tong's Fire Extinguisher Sales and Service                       Invoice Number: " + tfInvoice.getText() + "\n"
-				+ "                                                              P.O. Box 135 Elsinore, UT 84724                                       " + tfcustName.getText() + "\n"
-				+ "                                                              P.O. Box 3101 Cedar City, UT 84721                                 " +  tfcustAdr.getText() + "\n"
-				+ "                                                              (435) 201-2182                                                                   " + tfcustAdrCity.getText() + ", " + tfcustAdrState.getText() + ", " +tfcustAdrZip.getText()+ "\n"
-				+ "                                                              Lic. #" + "                                                                                    " + tfcustPhone.getText() + "\n" 
-				+ "\n" + "\n" + "\n"
+				printTa.appendText("\n" + "\n" + "\n" + "\n" + "\n"+"\n" + "\n" + "\n"
 				+ " Service Scheduled with:\t" + tfServ1.getText() + "\n"
 				+ " Store Closing Manager:\t" + tfServ2.getText()+ "\n"
 				+ " Date of Service:\t\t\t" + tfServ3.getText()+ "\n"
@@ -974,7 +1016,7 @@ public class HCRGen extends Application {
 				HBox printHBox = new HBox();
 				
 				printHBox.getChildren().addAll(btPrint,cancel);
-				//printStage.getChildren().addAll(printLabel,printTa,reportLogo);
+				
 				printBtStage.getChildren().addAll(printHBox);
 
 				Scene printScene = new Scene(printStage , 810, 1000);
@@ -1010,7 +1052,7 @@ public class HCRGen extends Application {
 							){
 							captureScreen("Reports/" + tfcustName.getText() + tfInvoice.getText() + ".jpg");
 							System.out.println("Image saved to file!");
-							
+							oos.close();
 						} catch (Exception exe) {
 							exe.printStackTrace();
 						}
@@ -1030,7 +1072,7 @@ public class HCRGen extends Application {
 				){
 				captureScreen("Reports/" + tfcustName.getText() + tfInvoice.getText()+ ".jpg");
 				System.out.println("Image saved to file!");
-				
+				oos.close();
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -1128,7 +1170,7 @@ public class HCRGen extends Application {
 			case "gBUFirb3": gBUFiSt = "Hvy"; break;
 		}
 	}
-	
+
 	public void setNew(String input, String btName){
 		switch (btName){		
 		case "hSRrb1": hSRSt = "New"; break;
@@ -1148,6 +1190,6 @@ public class HCRGen extends Application {
 		ImageIO.write(image, "png", new File(fileName));
 	}
 	public static void main(String[] args){
-			launch(args);
+		Application.launch(args);
 		}
 }
