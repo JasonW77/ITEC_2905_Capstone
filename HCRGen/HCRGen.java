@@ -32,27 +32,40 @@ import java.awt.image.*;
 import java.awt.Rectangle;
 import java.awt.Robot;
 
-
-
+/*to do list:
+	Date math for Service Every drop down.
+	Inaccessible areas check box, reactive code.
+	Multiple hoods check box, reactive code.
+	Key check box, reactive code.
+	No one available check box, reactive code.
+	Ask for input on the Initial Service/Regular Service/Inspection section.
+	Format the date and time text fields.
+	On action event for the technician notes and miscellaneous notes text areas.
+	move technician notes down one line.
+	move Customer Signature above claims notice.
+	add date next to customer signature.
+	add lines to sign on for signature and date fields.
+	
+*/
 public class HCRGen extends Application {
 	// Tong's Fire Extinguisher Sales and Service Information
 	//String licenceNum = " License. # KE82431 & KE113954";
 	String licNumTech1 = "Lic. # KE82431";
 	String licNumTech2 = "Lic. # KE113954";
-	String address1 = "P.O. Box 3101 \n Cedar City, UT 84721";
+	String address1 = "P.O. Box 3101 \nCedar City, UT 84721";
 	String address1p = "P.O. Box 3101";
 	String address1c = "Cedar City,";
 	String address1z = "UT 84721";
 	String tech1p = "1-435-201-2182";
-	String address2 = "P.O. Box 135 \n Elsinore, UT 84724";
+	String address2 = "P.O. Box 135 \nElsinore, UT 84724";
 	String address2p = "P.O. Box 135";
 	String address2c = "Elsinore,";
 	String address2z = "UT 84724";
 	String tech2p = "1-435-896-3840";	
 	int whichTech = 0;
-	String endTech1 = " ";
+	String endTech1 = "Tong's Fire Extinguisher Sales and Service \n" + address1p + "\n" + address1c + address1z + "\n" + tech1p + "\n" + licNumTech1;;
 	String endTech1l = " ";
-	String phoneNum = " (435) 201-2182";
+	String phoneNum = "(435) 201-2182";
 	String serviceInit = "";
 	String serviceReg = "";
 	String serviceInsp = "";
@@ -230,7 +243,7 @@ public class HCRGen extends Application {
 		invVBox.setAlignment(Pos.TOP_LEFT);
 		
 		Label invRefNum = new Label(" Invoice Reference #");
-		TextField tfInvoice = new TextField("Invoice number");
+		TextField tfInvoice = new TextField("####");
 		tfInvoice.setFont(new Font("Cambria", 10));
 		invVBox.getChildren().addAll(invRefNum, tfInvoice);
 		
@@ -255,10 +268,10 @@ public class HCRGen extends Application {
 		Label servLabel4 = new Label(" Service Every ");
 		Label servLabel5 = new Label(" Time of Service: ");
 		Label servLabel6 = new Label(" Next Service Due: ");
-		TextField tfServ1 = new TextField("tfServ1");
+		TextField tfServ1 = new TextField();
 		tfServ1.setMinWidth(205);
 		tfServ1.setFont(new Font("Cambria", 10));
-		TextField tfServ2 = new TextField("tfServ 2");
+		TextField tfServ2 = new TextField();
 		tfServ2.setFont(new Font("Cambria", 10));
 		tfServ2.setMaxWidth(275);
 		TextField tfServ3 = new TextField();
@@ -950,14 +963,31 @@ public class HCRGen extends Application {
 				techAddta.setMaxHeight(125);
 				techAddta.setMaxWidth(300);
 				techAddta.setEditable(false);
+				techAddta.setStyle("-fx-focus-color: transparent; -fx-text-box-border: transparent;");
 				
 				TextArea custAddta = new TextArea();
 				custAddta.setMaxHeight(125);
 				custAddta.setMaxWidth(300);
 				custAddta.setEditable(false);
+				custAddta.setStyle("-fx-focus-color: transparent; -fx-text-box-border: transparent;");
+				
+				TextArea cleanNotice = new TextArea();
+				cleanNotice.setMinHeight(125);
+				cleanNotice.setMinWidth(480);
+				//cleanNotice.setMaxHeight(125);
+				//cleanNotice.setMaxWidth(480);
+				cleanNotice.setEditable(false);
+				cleanNotice.setStyle("-fx-highlight-fill: #7ecfff;"
+									+"-fx-focus-color: transparent;"
+									+"-fx-text-box-border: transparent;"
+									+"-fx-font-size:10;"
+								    +"-fx-background-insets: 0;"
+								    +"-fx-background-color: transparent;"
+								    +"-fx-padding: 10px;"
+									);
 				
 				
-				AnchorPane printStage = new AnchorPane(printTa,reportLogo,techAddta,custAddta);
+				AnchorPane printStage = new AnchorPane(printTa,reportLogo,cleanNotice,techAddta,custAddta);
 
 				AnchorPane.setTopAnchor(reportLogo,10.0);
 				AnchorPane.setLeftAnchor(reportLogo,0.0);
@@ -967,9 +997,17 @@ public class HCRGen extends Application {
 				AnchorPane.setLeftAnchor(techAddta,225.0);
 				AnchorPane.setTopAnchor(custAddta,0.0);
 				AnchorPane.setRightAnchor(custAddta,0.0);
+				AnchorPane.setTopAnchor(cleanNotice,110.0);
+				AnchorPane.setRightAnchor(cleanNotice,1.0);
 
 				techAddta.appendText(endTech1);
 				custAddta.appendText("Invoice Number: " + tfInvoice.getText() + "\n" + custadd1na + "\n" + custadd1po + "\n" + custadd1csz + "\n" + custadd1ph);
+				cleanNotice.appendText("\nAll cleaning is in accordance with the local fire codes and/or NFPA Standard Code #96. This\n"
+						+ "courtesy follow-up report is provided as a free customer service only; it is not a paid consul-\n"
+						+ "tation. The inspection of the exhaust system is limited to the possible need for improved \n"
+						+ "access and cleaning only. Other deficiencies, wether reported or not, are beyond the scope of\n"
+						+ "our cleaning crew's knowledge. it is the owner of the exhaust system's responsibility to take \n"
+						+ "appropriate action to modify any deficiencies noted herein or elsewhere.\n");
 				
 				printTa.appendText("\n" + "\n" + "\n" + "\n" + "\n"+"\n" + "\n" + "\n"
 				+ " Service Scheduled with:\t" + tfServ1.getText() + "\n"
@@ -979,10 +1017,10 @@ public class HCRGen extends Application {
 				+ " Time of Service:\t\t\t" + tfServ5.getText()+ "\n"
 				+ " Next Service Due:\t\t\t" + tfServ6.getText()+ "\n"
 				+ "\n"
-				+ "Notes to cleaning Technicians:"
+				+ "Notes to cleaning Technicians:\n"
 				+ taServ1.getText() + "\n"
 				+ "\n"
-				+ "All cleaning is in accordance with the local fire codes and/or NFPA Standard Code #96. This courtesy follow-up report is \nprovided as a free customer service only; it is not a paid consultation. The inspection of the exhaust system is limited to the \npossible need for improved access and cleaning only. Other deficiencies, wether reported or not, are beyond the scope of our \ncleaning crew's knowledge. it is the owner of the exhaust system's responsibility to take appropriate action to modify any \ndeficiencies noted herein or elsewhere.\n"
+				
 				+ "\n"
 				+ "         KITCHEN EXHAUST CLEANING SERVICE REPORT\n"
 				+ "Type of Service completed - Initial Service: " + serviceInit + "                 Regular Service: " + serviceReg + "                Inspection: " + serviceInsp + "\n"
@@ -1047,10 +1085,17 @@ public class HCRGen extends Application {
 				
 				printTa.setOnKeyPressed(ex -> {
 					if (ex.getCode().equals(KeyCode.ENTER)) {
+						String PATH = "HCRGen/Reports/";
+						String dirName = PATH.concat(tfcustName.getText().trim());
+						File directory = new File(dirName + "/");
+						
+						if (! directory.exists()) {
+							directory.mkdirs();
+						}
 						try (
-							FileOutputStream oos = new FileOutputStream("Reports/" + tfcustName.getText() + tfInvoice.getText() + ".jpg", true);
+							FileOutputStream oos = new FileOutputStream(directory +"/"+ tfInvoice.getText().trim() + ".jpg", true);
 							){
-							captureScreen("Reports/" + tfcustName.getText() + tfInvoice.getText() + ".jpg");
+							captureScreen(directory +"/"+ tfInvoice.getText().trim() + ".jpg");
 							System.out.println("Image saved to file!");
 							oos.close();
 						} catch (Exception exe) {
@@ -1068,9 +1113,9 @@ public class HCRGen extends Application {
 		btPrint.setOnAction(e -> {
 			
 			try (
-				FileOutputStream oos = new FileOutputStream("Reports/" + tfcustName.getText() + tfInvoice.getText()+ ".jpg", true);
+				FileOutputStream oos = new FileOutputStream("/Reports/" + tfcustName.getText() + tfInvoice.getText()+ ".jpg", true);
 				){
-				captureScreen("Reports/" + tfcustName.getText() + tfInvoice.getText()+ ".jpg");
+				captureScreen("/Reports/" + tfcustName.getText() + tfInvoice.getText()+ ".jpg");
 				System.out.println("Image saved to file!");
 				oos.close();
 			} catch (Exception ex) {
