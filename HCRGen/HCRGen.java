@@ -964,7 +964,7 @@ public class HCRGen extends Application {
 		
 		moreHoods.setOnAction(e -> {
 			if (moreHoods.isSelected() == true) {
-				moreHoodsSt = "NO One Available to Sign";
+				moreHoodsSt = " ";
 			}
 			else if (moreHoods.isSelected() == false) {
 				moreHoodsSt = " ";
@@ -1070,7 +1070,8 @@ public class HCRGen extends Application {
 				+ "                  Time In: " + tfTI.getText()+ "                  Time Out: " + tfTO.getText()+ "\n"+ "\n"
 				+ "Miscellaneous Notes:\n"
 				+ miscNotTa.getText() + "\n"
-				+ "\nCustomer Signature: " + custSignSt + "\n"
+				+ "\nCustomer Signature: " + custSignSt + "                                                                                                         Date:\n"
+				+ "                                   --------------------------------------------------------------              -------------------------"  
 				+ "\nClaims of unsatisfactory workmanship must be made within 48 hours. Invoices are subject to an intrest charge of the lesser of \n1.5% per month(18% per year) or the maximum rate allowed by law on any unpaid invoices outstanding after 30 days from date \nof service. The Customer herby waives thier rights of subrogation by thier insurance carrier against Tong's Fire Extinguisher \nunder any fire or liability insurance policy.\n"
 				+ "IN THE EVENT OF DEFAULT, TONG'S FIRE EXTINGUISHER SHALL BE ENTITLED TO RECOVER COST OF COLLECTION, \nINCLUDING REASONABLE ATTORNEY FEES. \nACKNOWLEDGMENT OF KITCHEN CONDITION & KEC SERVICE COMPLETED. BY SIGNING BELOW THE CUSTOMER \nACKNOWLEDGES SERVICE WAS COMPLETED AND THE KITCHEN WAS LEFT CLEAN AND IN SATISFACTORY CONDITION.\n"
 				
