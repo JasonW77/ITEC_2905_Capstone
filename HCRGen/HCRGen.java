@@ -17,6 +17,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.control.ScrollPane;
@@ -27,24 +28,21 @@ import javafx.scene.layout.AnchorPane;
 import java.io.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
 import java.awt.Rectangle;
 import java.awt.Robot;
 
 /*to do list:
-	Date math for Service Every drop down.
-	Inaccessible areas check box, reactive code.
-	Multiple hoods check box, reactive code.
-	Key check box, reactive code.
-	No one available check box, reactive code.
-	Ask for input on the Initial Service/Regular Service/Inspection section.
-	Format the date and time text fields.
-	On action event for the technician notes and miscellaneous notes text areas.
-	move technician notes down one line.
-	move Customer Signature above claims notice.
-	add date next to customer signature.
-	add lines to sign on for signature and date fields.
+	*Fix the wrap text problem for the notes TextArea in the print stage.
+	*Ask for input from customer on the Initial "Service/Regular Service/Inspection" section. (referring to layout)	
+	*Multiple hoods check box, reactive code.(What is it the customer wants here exactly.)
+	*Add Date to img File.
+	*might not be needed
+	*	On action event for the technician notes and miscellaneous notes text areas.
+	*	add date next to customer signature.
+	*	add lines to sign on for signature and date fields.
 	
 */
 public class HCRGen extends Application {
@@ -97,6 +95,8 @@ public class HCRGen extends Application {
 	String photoTSt = "N/A";
 	String keyCBSt = "N/A";
 	String noAvailCBSt = "N/A";
+	String moreHoodsSt = " ";
+	LocalDate execDate;
 	
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException{
@@ -262,48 +262,40 @@ public class HCRGen extends Application {
 	*/
 	
 		//Create Service Schedule Information box
-		Label servLabel1 = new Label(" Service Scheduled with: ");
-		Label servLabel2 = new Label(" Store Closing Manager: ");
-		Label servLabel3 = new Label(" Date of Service: ");
-		Label servLabel4 = new Label(" Service Every ");
-		Label servLabel5 = new Label(" Time of Service: ");
-		Label servLabel6 = new Label(" Next Service Due: ");
-		TextField tfServ1 = new TextField();
-		tfServ1.setMinWidth(205);
-		tfServ1.setFont(new Font("Cambria", 10));
-		TextField tfServ2 = new TextField();
-		tfServ2.setFont(new Font("Cambria", 10));
-		tfServ2.setMaxWidth(275);
-		TextField tfServ3 = new TextField();
-		tfServ3.setFont(new Font("Cambria", 10));
-		tfServ3.setMaxWidth(75);
+		Label servSchLabel = new Label(" Service Scheduled with: ");
+		Label storeCMLabel = new Label(" Store Closing Manager: ");
+		Label dateOSLabel = new Label(" Date of Service: ");
+		Label serviceELabel = new Label(" Service Every ");
+		Label timeOSLabel = new Label(" Time of Service: ");
+		TextField servSchTF = new TextField();
+		servSchTF.setMinWidth(205);
+		servSchTF.setFont(new Font("Cambria", 10));
+		TextField storeCMTF = new TextField();
+		storeCMTF.setFont(new Font("Cambria", 10));
+		storeCMTF.setMaxWidth(275);
+		DatePicker dateOSDP = new DatePicker();
 		
-		ComboBox<String> tfServ4 = new ComboBox<String>();
-		tfServ4.getItems().addAll("Anually", "Bi-Anually", "Quarterly");
+		ComboBox<String> serviceECB = new ComboBox<String>();
+		serviceECB.getItems().addAll("Annually", "Bi-Annually", "Quarterly");
 		
-		TextField tfServ5 = new TextField();
-		tfServ5.setFont(new Font("Cambria", 10));
-		tfServ5.setMaxWidth(75);
-		TextField tfServ6 = new TextField();
-		tfServ6.setFont(new Font("Cambria", 10));
-		tfServ6.setMaxWidth(75);
+		TextField timeOSTF = new TextField("00:00");
+		timeOSTF.setFont(new Font("Cambria", 10));
+		timeOSTF.setMaxWidth(75);
 		
 		GridPane servGrid = new GridPane();
 		servGrid.setMinSize(400, 100);
 				
-		servGrid.add(servLabel1,0,0);
-		servGrid.add(tfServ1,1,0);
-		servGrid.add(servLabel2,0,1);
-		servGrid.add(tfServ2,1,1);
-		servGrid.add(servLabel3,0,2);
-		servGrid.add(tfServ3,1,2);
-		servGrid.add(servLabel5,0,3);
-		servGrid.add(tfServ5,1,3);
-		servGrid.add(servLabel4,0,4);
-		servGrid.add(tfServ4,1,4);
-		servGrid.add(servLabel6,0,5);
-		servGrid.add(tfServ6,1,5);
-		
+		servGrid.add(servSchLabel,0,0);
+		servGrid.add(servSchTF,1,0);
+		servGrid.add(storeCMLabel,0,1);
+		servGrid.add(storeCMTF,1,1);
+		servGrid.add(dateOSLabel,0,2);
+		servGrid.add(dateOSDP,1,2);
+		servGrid.add(timeOSLabel,0,3);
+		servGrid.add(timeOSTF,1,3);
+		servGrid.add(serviceELabel,0,4);
+		servGrid.add(serviceECB,1,4);
+
 		servGrid.setAlignment(Pos.TOP_LEFT);
 		
 		//Create Second row of boxes for Customer information and place them on the grid
@@ -364,6 +356,7 @@ public class HCRGen extends Application {
 		
 		//Create cleaning notes text area and label
 		TextArea taServ1 = new TextArea();
+		taServ1.setWrapText(true);
 		taServ1.setPrefHeight(50);
 		taServ1.setMaxWidth(750);
 
@@ -758,10 +751,10 @@ public class HCRGen extends Application {
 		Label tILabel = new Label("TIME IN: ");
 		Label tOLabel = new Label("TIME OUT: ");
 		
-		TextField tfTI = new TextField();
+		TextField tfTI = new TextField("00:00");
 		tfTI.setFont(new Font("Cambria", 10));
 		tfTI.setMaxWidth(80);
-		TextField tfTO = new TextField();
+		TextField tfTO = new TextField("00:00");
 		tfTO.setFont(new Font("Cambria", 10));
 		tfTO.setMaxWidth(80);
 		
@@ -791,25 +784,21 @@ public class HCRGen extends Application {
 		Label custSignLabel = new Label("Customer Name: ");
 		
 		TextArea miscNotTa = new TextArea();
+		miscNotTa.setWrapText(true);
 		miscNotTa.setFont(new Font("Cambria", 10));
 		miscNotTa.setWrapText(true);
 		miscNotTa.setMaxWidth(375);
 
 		ComboBox<String> techtf = new ComboBox<String>();
 		techtf.getItems().addAll("Scott", "Dusten");
-		
-		TextField techDatetf = new TextField();
-		techDatetf.setFont(new Font("Cambria", 10));
+		DatePicker techDatetf = new DatePicker();
 		TextField custSigntf = new TextField();
 		custSigntf.setFont(new Font("Cambria", 10));
 		Button btPreView = new Button("Preview");
 		Button btPrint = new Button("Print");
-		
 		CheckBox keyCB = new CheckBox("Key ");
-		//String keyCBSt = "No";
 		CheckBox noAvailCB = new CheckBox("No one available to sign ");
-		//String noAvailCBSt = "No one available to sign ";
-		
+
 		hb7.getChildren().addAll(vb4, vb5);
 		hb8.getChildren().addAll(keyCB, noAvailCB);
 		hb9.getChildren().addAll(techSigLabel,techtf);
@@ -820,7 +809,6 @@ public class HCRGen extends Application {
 		vb5.getChildren().addAll(claimLabel, eventLabel, hb8, ackLabel, hb11);
 		
 		//OnAction events for radio buttons and check boxes
-		
 		dKWrb1.setOnAction(e -> {setYes(dkWSt, "dKWrb1"); });
 		dKWrb2.setOnAction(e -> {setNo(dkWSt, "dKWrb2"); });
 				
@@ -927,6 +915,18 @@ public class HCRGen extends Application {
 				serviceInsp = "NO";
 			}
 		});
+
+		serviceECB.setOnAction(e -> {
+			if (serviceECB.getValue() == "Annually") {
+				execDate = dateOSDP.getValue().plusMonths(12);
+			}
+			else if (serviceECB.getValue() == "Bi-Annually") {
+				execDate = dateOSDP.getValue().plusMonths(6);
+			}
+			else if (serviceECB.getValue() == "Quarterly") {
+				execDate = dateOSDP.getValue().plusMonths(3);
+			}
+		});
 		
 		techtf.setOnAction(e -> {
 			if (techtf.getValue() == "Scott") {
@@ -938,10 +938,37 @@ public class HCRGen extends Application {
 			}
 		});
 		
-		inAccCB.setOnAction(e -> {});		
-		keyCB.setOnAction(e -> {});
-		noAvailCB.setOnAction(e -> {});
-		moreHoods.setOnAction(e -> {});
+		inAccCB.setOnAction(e -> {
+			if (inAccCB.isSelected() == true) {
+				inAccCBSt = "YES";
+			}
+			else if (inAccCB.isSelected() == false) {
+				inAccCBSt = "NO";
+		}});		
+		
+		keyCB.setOnAction(e -> {
+			if (keyCB.isSelected() == true) {
+				keyCBSt = "YES";
+			}
+			else if (keyCB.isSelected() == false) {
+				keyCBSt = "NO";
+		}});
+		
+		noAvailCB.setOnAction(e -> {
+			if (noAvailCB.isSelected() == true) {
+				custSigntf.appendText("NO One Available to Sign");
+			}
+			else if (noAvailCB.isSelected() == false) {
+				custSigntf.setText(" ");
+		}});
+		
+		moreHoods.setOnAction(e -> {
+			if (moreHoods.isSelected() == true) {
+				moreHoodsSt = "NO One Available to Sign";
+			}
+			else if (moreHoods.isSelected() == false) {
+				moreHoodsSt = " ";
+		}});
 		
 		//send image of GUI to file.
 		btPreView.setOnAction(e -> {
@@ -949,6 +976,8 @@ public class HCRGen extends Application {
 			String custadd1po = tfcustAdr.getText().trim();
 			String custadd1csz = tfcustAdrCity.getText().trim() + ", " + tfcustAdrState.getText().trim() + ", " +tfcustAdrZip.getText().trim();
 			String custadd1ph = tfcustPhone.getText().trim();
+			String custSignSt = custSigntf.getText();
+			//String nextServDate = execDate;
 			
 			StackPane printBtStage = new StackPane();
 				
@@ -974,8 +1003,6 @@ public class HCRGen extends Application {
 				TextArea cleanNotice = new TextArea();
 				cleanNotice.setMinHeight(125);
 				cleanNotice.setMinWidth(480);
-				//cleanNotice.setMaxHeight(125);
-				//cleanNotice.setMaxWidth(480);
 				cleanNotice.setEditable(false);
 				cleanNotice.setStyle("-fx-highlight-fill: #7ecfff;"
 									+"-fx-focus-color: transparent;"
@@ -1010,12 +1037,12 @@ public class HCRGen extends Application {
 						+ "appropriate action to modify any deficiencies noted herein or elsewhere.\n");
 				
 				printTa.appendText("\n" + "\n" + "\n" + "\n" + "\n"+"\n" + "\n" + "\n"
-				+ " Service Scheduled with:\t" + tfServ1.getText() + "\n"
-				+ " Store Closing Manager:\t" + tfServ2.getText()+ "\n"
-				+ " Date of Service:\t\t\t" + tfServ3.getText()+ "\n"
-				+ " Service Every:\t\t\t" + tfServ4.getValue()+ "\n"
-				+ " Time of Service:\t\t\t" + tfServ5.getText()+ "\n"
-				+ " Next Service Due:\t\t\t" + tfServ6.getText()+ "\n"
+				+ " Service Scheduled with:\t" + servSchTF.getText() + "\n"
+				+ " Store Closing Manager:\t" + storeCMTF.getText()+ "\n"
+				+ " Date of Service:\t\t\t" + dateOSDP.getValue()+ "\n"
+				+ " Service Every:\t\t\t" + serviceECB.getValue()+ "\n"
+				+ " Time of Service:\t\t\t" + timeOSTF.getText()+ "\n"
+				+ " Next Service Due:\t\t\t" + execDate + "\n"
 				+ "\n"
 				+ "Notes to cleaning Technicians:\n"
 				+ taServ1.getText() + "\n"
@@ -1037,17 +1064,17 @@ public class HCRGen extends Application {
 				+ "10. Grease build up on fan blades: \t\t" + gBUFBSt + "\t\t\t" + "10. Pilot lights reignited:\t\t\t\t\t " + pLRSt + "\n"
 				+ "11. Grease build up on Stacks/Ductwork: \t" + gBUSDSt + "\t\t\t" + "11. Photos taken:\t\t\t\t\t\t\t " + photoTSt + "\n"
 				+ "12. Grease build up on Hoods: \t\t\t" + gBUHSt + "\t\t\t" + "12. Hood Sticker replaced:\t\t\t\t\t " + hSRSt + "\n"
-				+ "13. Grease build up on Filter: \t\t\t" + gBUFiSt + "\t\t\t" + "Inaccessible areas?:\t\t\t\t " + inAccCBSt + "\n" + "\n"
-
-				+ "Cleaning Technician that performed service: " + techtf.getValue() +"\n"
-				+ "Date Completed: " + techDatetf.getText() 
+				+ "13. Grease build up on Filter: \t\t\t" + gBUFiSt + "\t\t\t" + "Inaccessible areas?:  " + inAccCBSt + "            Key Available?:  " + keyCBSt +"\n" + "\n"
+				+ "Cleaning Technician that performed service: " + techtf.getValue() + "\n"
+				+ "Date Completed: " + techDatetf.getValue() 
 				+ "                  Time In: " + tfTI.getText()+ "                  Time Out: " + tfTO.getText()+ "\n"+ "\n"
 				+ "Miscellaneous Notes:\n"
 				+ miscNotTa.getText() + "\n"
+				+ "\nCustomer Signature: " + custSignSt + "\n"
 				+ "\nClaims of unsatisfactory workmanship must be made within 48 hours. Invoices are subject to an intrest charge of the lesser of \n1.5% per month(18% per year) or the maximum rate allowed by law on any unpaid invoices outstanding after 30 days from date \nof service. The Customer herby waives thier rights of subrogation by thier insurance carrier against Tong's Fire Extinguisher \nunder any fire or liability insurance policy.\n"
 				+ "IN THE EVENT OF DEFAULT, TONG'S FIRE EXTINGUISHER SHALL BE ENTITLED TO RECOVER COST OF COLLECTION, \nINCLUDING REASONABLE ATTORNEY FEES. \nACKNOWLEDGMENT OF KITCHEN CONDITION & KEC SERVICE COMPLETED. BY SIGNING BELOW THE CUSTOMER \nACKNOWLEDGES SERVICE WAS COMPLETED AND THE KITCHEN WAS LEFT CLEAN AND IN SATISFACTORY CONDITION.\n"
-				+ keyCB.isSelected()
-				+ "\nCustomer Signature: "
+				
+				
 				
 				);
 				
@@ -1111,11 +1138,17 @@ public class HCRGen extends Application {
 		});
 		
 		btPrint.setOnAction(e -> {
+			String PATH = "HCRGen/Reports/";
+			String dirName = PATH.concat(tfcustName.getText().trim());
+			File directory = new File(dirName + "/");
 			
+			if (! directory.exists()) {
+				directory.mkdirs();
+			}
 			try (
-				FileOutputStream oos = new FileOutputStream("/Reports/" + tfcustName.getText() + tfInvoice.getText()+ ".jpg", true);
+				FileOutputStream oos = new FileOutputStream(directory +"/"+ tfInvoice.getText()+ ".jpg", true);
 				){
-				captureScreen("/Reports/" + tfcustName.getText() + tfInvoice.getText()+ ".jpg");
+				captureScreen(directory +"/"+  tfInvoice.getText()+ ".jpg");
 				System.out.println("Image saved to file!");
 				oos.close();
 			} catch (Exception ex) {
