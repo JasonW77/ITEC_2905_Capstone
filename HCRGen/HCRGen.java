@@ -36,18 +36,11 @@ import java.awt.Robot;
 
 /*to do list:
 	*Fix the wrap text problem for the notes TextArea in the print stage.
-	*Ask for input from customer on the Initial "Service/Regular Service/Inspection" section. (referring to layout)	
-	*Multiple hoods check box, reactive code.(What is it the customer wants here exactly.)
-	*Add Date to img File.
-	*might not be needed
-	*	On action event for the technician notes and miscellaneous notes text areas.
-	*	add date next to customer signature.
-	*	add lines to sign on for signature and date fields.
-	
+	*On action event for the technician notes and miscellaneous notes text areas. to help with flow
+	*Remove cleaning, claims, and Event notice from user UI
+
 */
 public class HCRGen extends Application {
-	// Tong's Fire Extinguisher Sales and Service Information
-	//String licenceNum = " License. # KE82431 & KE113954";
 	String licNumTech1 = "Lic. # KE82431";
 	String licNumTech2 = "Lic. # KE113954";
 	String address1 = "P.O. Box 3101 \nCedar City, UT 84721";
@@ -97,6 +90,7 @@ public class HCRGen extends Application {
 	String noAvailCBSt = "N/A";
 	String moreHoodsSt = " ";
 	LocalDate execDate;
+	int d = 0000;
 	
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException{
@@ -196,7 +190,6 @@ public class HCRGen extends Application {
 		~ Business Info
 		~ Invoice box
 	*/
-		
 		//create GridPane for the logo, business information and invoice Box
 		GridPane headPane = new GridPane();
 		headPane.setMinSize(200, 100);
@@ -260,7 +253,6 @@ public class HCRGen extends Application {
 		~ Service Info Box
 		~ Customer Info Box
 	*/
-	
 		//Create Service Schedule Information box
 		Label servSchLabel = new Label(" Service Scheduled with: ");
 		Label storeCMLabel = new Label(" Store Closing Manager: ");
@@ -364,10 +356,10 @@ public class HCRGen extends Application {
 		
 		vb2.getChildren().addAll(servLabel7, taServ1);
 		
-		/*
-		Items that go in hb3 go here
-			~ cleaning notice label *cLNOLabel*
-		*/
+	/*
+	Items that go in hb3 go here
+		~ cleaning notice label *cLNOLabel*
+	*/
 		//Create the cleaning notice and place it in the grid
 		Label clNoLabel = new Label("All cleaning is in accordance with the local fire codes and/or NFPA Standard Code #96. This courtesy follow-up report is provided as a free customer service only; it is not a paid consultation. The inspection of the exhaust system is limited to the possible need for improved access and cleaning only. Other deficiencies, wether reported or not, are beyond the scope of our cleaning crew's knowledge. it is the owner of the exhaust system's responsibility to take appropriate action to modify any deficiencies noted herein or elsewhere.");
 		clNoLabel.setFont(new Font("Cambria", 10));
@@ -605,9 +597,12 @@ public class HCRGen extends Application {
 
 		CheckBox inAccCB = new CheckBox("INACESSIBLE AREAS AND/OR FIRE CODE VIOLATIONS EXIST");
 		inAccCB.setFont(new Font("Cambria", 10));
-		CheckBox moreHoods = new CheckBox("Multiple Hoods");
+		Label moreHoods = new Label("Hood Description");
 		moreHoods.setFont(new Font("Cambria", 10));
-		
+		moreHoods.setMaxWidth(115);
+		TextField moreHoods2 = new TextField();
+		moreHoods2.setFont(new Font("Cambria", 10));
+		moreHoods2.setMaxWidth(200);
 		
 		ToggleGroup fWLR = new ToggleGroup();
 		RadioButton fWLRrb1 = new RadioButton();
@@ -740,6 +735,7 @@ public class HCRGen extends Application {
 		cOBGrid.add(inAccCB,0,14);
 		
 		cOBGrid.add(moreHoods,0,15);
+		cOBGrid.add(moreHoods2,0,16);
 		
 		hb5.getChildren().addAll(cIBGrid, cOBGrid);
 		
@@ -962,14 +958,6 @@ public class HCRGen extends Application {
 				custSigntf.setText(" ");
 		}});
 		
-		moreHoods.setOnAction(e -> {
-			if (moreHoods.isSelected() == true) {
-				moreHoodsSt = " ";
-			}
-			else if (moreHoods.isSelected() == false) {
-				moreHoodsSt = " ";
-		}});
-		
 		//send image of GUI to file.
 		btPreView.setOnAction(e -> {
 			String custadd1na = tfcustName.getText().trim();
@@ -977,12 +965,15 @@ public class HCRGen extends Application {
 			String custadd1csz = tfcustAdrCity.getText().trim() + ", " + tfcustAdrState.getText().trim() + ", " +tfcustAdrZip.getText().trim();
 			String custadd1ph = tfcustPhone.getText().trim();
 			String custSignSt = custSigntf.getText();
-			//String nextServDate = execDate;
 			
+			if (d != 0000) {
+				d = (dateOSDP).getValue().getYear();
+			}
+				
 			StackPane printBtStage = new StackPane();
 				
 				Button cancel = new Button("Close Preview");
-				
+
 				TextArea printTa = new TextArea();
 				printTa.setMinHeight(1000);
 				printTa.setMinWidth(810);
@@ -1012,7 +1003,6 @@ public class HCRGen extends Application {
 								    +"-fx-background-color: transparent;"
 								    +"-fx-padding: 10px;"
 									);
-				
 				
 				AnchorPane printStage = new AnchorPane(printTa,reportLogo,cleanNotice,techAddta,custAddta);
 
@@ -1047,9 +1037,8 @@ public class HCRGen extends Application {
 				+ "Notes to cleaning Technicians:\n"
 				+ taServ1.getText() + "\n"
 				+ "\n"
-				
 				+ "\n"
-				+ "         KITCHEN EXHAUST CLEANING SERVICE REPORT\n"
+				+ "                   KITCHEN EXHAUST CLEANING SERVICE REPORT FOR HOOD:  " + moreHoods2.getText()+ "\n"
 				+ "Type of Service completed - Initial Service: " + serviceInit + "                 Regular Service: " + serviceReg + "                Inspection: " + serviceInsp + "\n"
 				+ "Check in: \t\t\t\t\t\t\t\t\t\t Check Out: " + "\n"
 				+ "1. Key works: \t\t\t\t\t\t\t" + dkWSt + "\t\t\t" + "1. Fans working and left running:\t\t\t\t " + fWLRSt +"\n"
@@ -1065,17 +1054,15 @@ public class HCRGen extends Application {
 				+ "11. Grease build up on Stacks/Ductwork: \t" + gBUSDSt + "\t\t\t" + "11. Photos taken:\t\t\t\t\t\t\t " + photoTSt + "\n"
 				+ "12. Grease build up on Hoods: \t\t\t" + gBUHSt + "\t\t\t" + "12. Hood Sticker replaced:\t\t\t\t\t " + hSRSt + "\n"
 				+ "13. Grease build up on Filter: \t\t\t" + gBUFiSt + "\t\t\t" + "Inaccessible areas?:  " + inAccCBSt + "            Key Available?:  " + keyCBSt +"\n" + "\n"
-				+ "Cleaning Technician that performed service: " + techtf.getValue() + "\n"
+				+ "Cleaning Technician that performed service:      " + techtf.getValue() + "\n"
 				+ "Date Completed: " + techDatetf.getValue() 
 				+ "                  Time In: " + tfTI.getText()+ "                  Time Out: " + tfTO.getText()+ "\n"+ "\n"
 				+ "Miscellaneous Notes:\n"
 				+ miscNotTa.getText() + "\n"
+				+ "IN THE EVENT OF DEFAULT, TONG'S FIRE EXTINGUISHER SHALL BE ENTITLED TO RECOVER COST OF COLLECTION, \nINCLUDING REASONABLE ATTORNEY FEES. \nACKNOWLEDGMENT OF KITCHEN CONDITION & KEC SERVICE COMPLETED. BY SIGNING BELOW THE CUSTOMER \nACKNOWLEDGES SERVICE WAS COMPLETED AND THE KITCHEN WAS LEFT CLEAN AND IN SATISFACTORY CONDITION.\n"
 				+ "\nCustomer Signature: " + custSignSt + "                                                                                                         Date:\n"
 				+ "                                   --------------------------------------------------------------              -------------------------"  
 				+ "\nClaims of unsatisfactory workmanship must be made within 48 hours. Invoices are subject to an intrest charge of the lesser of \n1.5% per month(18% per year) or the maximum rate allowed by law on any unpaid invoices outstanding after 30 days from date \nof service. The Customer herby waives thier rights of subrogation by thier insurance carrier against Tong's Fire Extinguisher \nunder any fire or liability insurance policy.\n"
-				+ "IN THE EVENT OF DEFAULT, TONG'S FIRE EXTINGUISHER SHALL BE ENTITLED TO RECOVER COST OF COLLECTION, \nINCLUDING REASONABLE ATTORNEY FEES. \nACKNOWLEDGMENT OF KITCHEN CONDITION & KEC SERVICE COMPLETED. BY SIGNING BELOW THE CUSTOMER \nACKNOWLEDGES SERVICE WAS COMPLETED AND THE KITCHEN WAS LEFT CLEAN AND IN SATISFACTORY CONDITION.\n"
-				
-				
 				
 				);
 				
@@ -1115,7 +1102,7 @@ public class HCRGen extends Application {
 					if (ex.getCode().equals(KeyCode.ENTER)) {
 						String PATH = "HCRGen/Reports/";
 						String dirName = PATH.concat(tfcustName.getText().trim());
-						File directory = new File(dirName + "/");
+						File directory = new File(dirName + "/" + d + "/");
 						
 						if (! directory.exists()) {
 							directory.mkdirs();
@@ -1141,7 +1128,7 @@ public class HCRGen extends Application {
 		btPrint.setOnAction(e -> {
 			String PATH = "HCRGen/Reports/";
 			String dirName = PATH.concat(tfcustName.getText().trim());
-			File directory = new File(dirName + "/");
+			File directory = new File(dirName + "/" + d + "/");
 			
 			if (! directory.exists()) {
 				directory.mkdirs();
@@ -1166,10 +1153,8 @@ public class HCRGen extends Application {
 		primaryStage.setY(0);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
 	}
 
-	
 	public void setYes(String input, String btName){
 		switch (btName){
 			case "dKWrb1": dkWSt = "Yes"; break;
