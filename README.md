@@ -12,6 +12,20 @@ I created this program for my Capstone project in that class. In cooperation wit
 ## How to use
 This program is utilized via a javafx GUI.
 
+The user will enter customer information for the report through the GUI using text fields, dropdown boxes, date picker, and text area.
+![Alt text](https://github.com/JasonW77/ITEC_2905_Capstone/blob/master/screens/topscreen.png)
+
+The user will add report information for the service that was completed in the kitchen hodd area of the GUI.
+![Alt text](https://github.com/JasonW77/ITEC_2905_Capstone/blob/master/screens/KitchenScreen.png)
+
+The User will finish the report after all the information has been input, by clicking the print preview button on the bottom of the page.
+![Alt text](https://github.com/JasonW77/ITEC_2905_Capstone/blob/master/screens/Bottomscreen.png)
+
+here is a screen shot of the report that will be generated.
+![Alt text](https://github.com/JasonW77/ITEC_2905_Capstone/blob/master/screens/reportscreen.png)
+
+the User can capture the report as a file in two ways, by clicking the print button on the print pane, or by selecting the page and hitting the enter key.
+![Alt text](https://github.com/JasonW77/ITEC_2905_Capstone/blob/master/screens/printscreen.png)
 
 ## Code Example
 here is a code example of the user adding information through the UI using radio buttons.
