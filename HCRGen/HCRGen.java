@@ -1,3 +1,14 @@
+/**
+ *  * <h1>JavaDoc</h1>
+ * 
+ *  HCRGen application for generating Hood Cleaning Reports (or HCRGen.java).
+ * 	I created this program for the South west Technical College software Development_Capstone Project 2019-20
+ * 	 
+ * 
+	<p>Date created 8/17/2020 <p/>
+	
+	@author Jason Waters
+ */
 package HCRGen;
 
 import javafx.application.Application;
@@ -42,6 +53,9 @@ import java.awt.Robot;
 	*Remove cleaning, claims, and Event notice from user UI
 
 */
+/**
+ * 
+ */
 public class HCRGen extends Application {
 	String licNumTech1 = "Lic. # KE82431";
 	String licNumTech2 = "Lic. # KE113954";
@@ -94,6 +108,9 @@ public class HCRGen extends Application {
 	LocalDate execDate;
 	int repDate = 0000;
 	
+	/**
+	 * 
+	 */
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException{
 		//Create a main page VBox and set its attributes
@@ -1167,7 +1184,11 @@ public class HCRGen extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-
+	/**
+	 * Method for setting the radio group to yes
+	 * @param input name for radio group
+	 * @param btName name of button 
+	 */
 	public void setYes(String input, String btName){
 		switch (btName){
 			case "dKWrb1": dkWSt = "Yes"; break;
@@ -1192,7 +1213,11 @@ public class HCRGen extends Application {
 			case "photoTrb1": photoTSt = "Yes"; break;
 		}
 	}
-	
+	/**
+	 * Method for setting the radio group to no
+	 * @param input name for radio group
+	 * @param btName name of button 
+	 */
 	public void setNo(String input, String btName){
 		switch (btName){
 		case "dKWrb2": dkWSt = "No"; break;
@@ -1217,7 +1242,11 @@ public class HCRGen extends Application {
 		case "photoTrb2": photoTSt = "No"; break;
 		}
 	}
-	
+	/**
+	 * Method for setting the radio group to Light
+	 * @param input name for radio group
+	 * @param btName name of button 
+	 */
 	public void setLight(String input, String btName){
 		switch (btName) {
 			case "gBURFrb1": gBURFSt = "Lit"; break;
@@ -1227,7 +1256,11 @@ public class HCRGen extends Application {
 			case "gBUFirb1": gBUFiSt = "Lit"; break;
 		}
 	}
-	
+	/**
+	 * Method for setting the radio group to Medium
+	 * @param input name for radio group
+	 * @param btName name of button 
+	 */
 	public void setMedium(String input, String btName){
 		switch (btName) {
 			case "gBURFrb2": gBURFSt = "Med"; break;
@@ -1237,7 +1270,11 @@ public class HCRGen extends Application {
 			case "gBUFirb2": gBUFiSt = "Med"; break;
 		}
 	}
-	
+	/**
+	 * Method for setting the radio group to Heavy
+	 * @param input name for radio group
+	 * @param btName name of button 
+	 */
 	public void setHeavy(String input, String btName){
 		switch (btName) {
 			case "gBURFrb3": gBURFSt = "Hvy"; break;
@@ -1247,25 +1284,38 @@ public class HCRGen extends Application {
 			case "gBUFirb3": gBUFiSt = "Hvy"; break;
 		}
 	}
-
+	/**
+	 * Method for setting the radio group to New when changing the label
+	 * @param input name for radio group
+	 * @param btName name of button 
+	 */
 	public void setNew(String input, String btName){
 		switch (btName){		
 		case "hSRrb1": hSRSt = "New"; break;
 		}
 	}
-	
+	/**
+	 * Method for setting the radio group to Update when changing the label
+	 * @param input name for radio group
+	 * @param btName name of button 
+	 */
 	public void setUp(String input, String btName){
 		switch (btName){		
 		case "hSRrb2": hSRSt = "Update"; break;
 		}
 	}
-	
+	/**
+	 * Method for Capturing the screen as a file to save the report
+	 * @param fileName name for the file to be generated
+	 * @throws Exception listed for IO file not found exception
+	 */
 	public void captureScreen(String fileName) throws Exception {
 		Rectangle screenRectangle = new Rectangle(1, 45, 800, 950);
 		Robot robot = new Robot();
 		BufferedImage image = robot.createScreenCapture(screenRectangle);
 		ImageIO.write(image, "png", new File(fileName));
 	}
+
 	public static void main(String[] args){
 		Application.launch(args);
 		}
