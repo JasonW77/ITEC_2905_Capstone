@@ -1,6 +1,8 @@
 package HCRGen;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -90,7 +92,7 @@ public class HCRGen extends Application {
 	String noAvailCBSt = "N/A";
 	String moreHoodsSt = " ";
 	LocalDate execDate;
-	int d = 0000;
+	int repDate = 0000;
 	
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException{
@@ -788,7 +790,7 @@ public class HCRGen extends Application {
 		ComboBox<String> techtf = new ComboBox<String>();
 		techtf.getItems().addAll("Scott", "Dusten");
 		DatePicker techDatetf = new DatePicker();
-		TextField custSigntf = new TextField();
+		TextField custSigntf = new TextField( "                                                                                                         Date: ");
 		custSigntf.setFont(new Font("Cambria", 10));
 		Button btPreView = new Button("Preview");
 		Button btPrint = new Button("Print");
@@ -801,7 +803,7 @@ public class HCRGen extends Application {
 		hb10.getChildren().addAll(techSigDate, techDatetf);
 		hb11.getChildren().addAll(custSignLabel,custSigntf);
 		
-		vb4.getChildren().addAll(miscNotLabel, miscNotTa, hb9, hb10, btPreView/*, btPrint*/);
+		vb4.getChildren().addAll(miscNotLabel, miscNotTa, hb9,/* hb10,*/ btPreView);
 		vb5.getChildren().addAll(claimLabel, eventLabel, hb8, ackLabel, hb11);
 		
 		//OnAction events for radio buttons and check boxes
@@ -911,7 +913,17 @@ public class HCRGen extends Application {
 				serviceInsp = "NO";
 			}
 		});
+		
+        // action event 
+        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() { 
+            public void handle(ActionEvent e){ 
+                // get the date picker value 
+            	repDate = dateOSDP.getValue().getYear();
+            } 
+        };
 
+		dateOSDP.setOnAction(event);
+	
 		serviceECB.setOnAction(e -> {
 			if (serviceECB.getValue() == "Annually") {
 				execDate = dateOSDP.getValue().plusMonths(12);
@@ -952,10 +964,10 @@ public class HCRGen extends Application {
 		
 		noAvailCB.setOnAction(e -> {
 			if (noAvailCB.isSelected() == true) {
-				custSigntf.appendText("NO One Available to Sign");
+				custSigntf.setText("NO One Available to Sign                                                               Date: ");
 			}
 			else if (noAvailCB.isSelected() == false) {
-				custSigntf.setText(" ");
+				custSigntf.setText( "                                                                                                         Date: ");
 		}});
 		
 		//send image of GUI to file.
@@ -966,8 +978,9 @@ public class HCRGen extends Application {
 			String custadd1ph = tfcustPhone.getText().trim();
 			String custSignSt = custSigntf.getText();
 			
-			if (d != 0000) {
-				d = (dateOSDP).getValue().getYear();
+			if (repDate != 0000) {
+				System.out.println(repDate);
+				repDate = dateOSDP.getValue().getYear();
 			}
 				
 			StackPane printBtStage = new StackPane();
@@ -1060,7 +1073,7 @@ public class HCRGen extends Application {
 				+ "Miscellaneous Notes:\n"
 				+ miscNotTa.getText() + "\n"
 				+ "IN THE EVENT OF DEFAULT, TONG'S FIRE EXTINGUISHER SHALL BE ENTITLED TO RECOVER COST OF COLLECTION, \nINCLUDING REASONABLE ATTORNEY FEES. \nACKNOWLEDGMENT OF KITCHEN CONDITION & KEC SERVICE COMPLETED. BY SIGNING BELOW THE CUSTOMER \nACKNOWLEDGES SERVICE WAS COMPLETED AND THE KITCHEN WAS LEFT CLEAN AND IN SATISFACTORY CONDITION.\n"
-				+ "\nCustomer Signature: " + custSignSt + "                                                                                                         Date:\n"
+				+ "\nCustomer Signature: " + custSignSt + "\n"
 				+ "                                   --------------------------------------------------------------              -------------------------"  
 				+ "\nClaims of unsatisfactory workmanship must be made within 48 hours. Invoices are subject to an intrest charge of the lesser of \n1.5% per month(18% per year) or the maximum rate allowed by law on any unpaid invoices outstanding after 30 days from date \nof service. The Customer herby waives thier rights of subrogation by thier insurance carrier against Tong's Fire Extinguisher \nunder any fire or liability insurance policy.\n"
 				
@@ -1102,7 +1115,7 @@ public class HCRGen extends Application {
 					if (ex.getCode().equals(KeyCode.ENTER)) {
 						String PATH = "HCRGen/Reports/";
 						String dirName = PATH.concat(tfcustName.getText().trim());
-						File directory = new File(dirName + "/" + d + "/");
+						File directory = new File(dirName + "/" + repDate + "/");
 						
 						if (! directory.exists()) {
 							directory.mkdirs();
@@ -1128,7 +1141,7 @@ public class HCRGen extends Application {
 		btPrint.setOnAction(e -> {
 			String PATH = "HCRGen/Reports/";
 			String dirName = PATH.concat(tfcustName.getText().trim());
-			File directory = new File(dirName + "/" + d + "/");
+			File directory = new File(dirName + "/" + repDate + "/");
 			
 			if (! directory.exists()) {
 				directory.mkdirs();
