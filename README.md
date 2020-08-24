@@ -94,7 +94,7 @@ here is a code example of part of the Report that is generated.
 ```
 
 ## Future Goals, updates, Bugs, and fixes.
-*email functionality to send the customer the report directly from the Application.*
-*Photograph integration, access the camera from the aplication and attach the files along with the report for email to customer.*
-*Fix the wrap text problem for the notes TextArea in the print stage.*
+*email functionality to send the customer the report directly from the Application.
+*Photograph integration, access the camera from the aplication and attach the files along with the report for email to customer.
+*Fix the wrap text problem for the notes TextArea in the print stage.
 
