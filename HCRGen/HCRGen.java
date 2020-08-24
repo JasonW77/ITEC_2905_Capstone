@@ -49,9 +49,6 @@ import java.awt.Robot;
 
 /*to do list:
 	*Fix the wrap text problem for the notes TextArea in the print stage.
-	*On action event for the technician notes and miscellaneous notes text areas. to help with flow
-	*Remove cleaning, claims, and Event notice from user UI
-
 */
 /**
  * 
@@ -1129,6 +1126,81 @@ public class HCRGen extends Application {
 				});
 				
 				printTa.setOnKeyPressed(ex -> {
+					if (ex.getCode().equals(KeyCode.ENTER)) {
+						String PATH = "HCRGen/Reports/";
+						String dirName = PATH.concat(tfcustName.getText().trim());
+						File directory = new File(dirName + "/" + repDate + "/");
+						
+						if (! directory.exists()) {
+							directory.mkdirs();
+						}
+						try (
+							FileOutputStream oos = new FileOutputStream(directory +"/"+ tfInvoice.getText().trim() + ".jpg", true);
+							){
+							captureScreen(directory +"/"+ tfInvoice.getText().trim() + ".jpg");
+							System.out.println("Image saved to file!");
+							oos.close();
+						} catch (Exception exe) {
+							exe.printStackTrace();
+						}
+					}
+					else if (ex.getCode().equals(KeyCode.ESCAPE)) {
+						printWindow.close();	
+						printBtWindow.close();
+					}	
+	
+				});
+				cleanNotice.setOnKeyPressed(ex -> {
+					if (ex.getCode().equals(KeyCode.ENTER)) {
+						String PATH = "HCRGen/Reports/";
+						String dirName = PATH.concat(tfcustName.getText().trim());
+						File directory = new File(dirName + "/" + repDate + "/");
+						
+						if (! directory.exists()) {
+							directory.mkdirs();
+						}
+						try (
+							FileOutputStream oos = new FileOutputStream(directory +"/"+ tfInvoice.getText().trim() + ".jpg", true);
+							){
+							captureScreen(directory +"/"+ tfInvoice.getText().trim() + ".jpg");
+							System.out.println("Image saved to file!");
+							oos.close();
+						} catch (Exception exe) {
+							exe.printStackTrace();
+						}
+					}
+					else if (ex.getCode().equals(KeyCode.ESCAPE)) {
+						printWindow.close();	
+						printBtWindow.close();
+					}	
+	
+				});
+				techAddta.setOnKeyPressed(ex -> {
+					if (ex.getCode().equals(KeyCode.ENTER)) {
+						String PATH = "HCRGen/Reports/";
+						String dirName = PATH.concat(tfcustName.getText().trim());
+						File directory = new File(dirName + "/" + repDate + "/");
+						
+						if (! directory.exists()) {
+							directory.mkdirs();
+						}
+						try (
+							FileOutputStream oos = new FileOutputStream(directory +"/"+ tfInvoice.getText().trim() + ".jpg", true);
+							){
+							captureScreen(directory +"/"+ tfInvoice.getText().trim() + ".jpg");
+							System.out.println("Image saved to file!");
+							oos.close();
+						} catch (Exception exe) {
+							exe.printStackTrace();
+						}
+					}
+					else if (ex.getCode().equals(KeyCode.ESCAPE)) {
+						printWindow.close();	
+						printBtWindow.close();
+					}	
+	
+				});
+				custAddta.setOnKeyPressed(ex -> {
 					if (ex.getCode().equals(KeyCode.ENTER)) {
 						String PATH = "HCRGen/Reports/";
 						String dirName = PATH.concat(tfcustName.getText().trim());
