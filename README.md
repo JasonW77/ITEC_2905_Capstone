@@ -94,9 +94,7 @@ here is a code example of part of the Report that is generated.
 ```
 
 ## Future Goals, updates, Bugs, and fixes.
-*email functionality to send the customer the report directly from the Application.
-*Photograph integration, access the camera from the aplication and attach the files along with the report for email to customer.
-*Fix the wrap text problem for the notes TextArea in the print stage.
-*On action event for the technician notes and miscellaneous notes text areas. to help with flow
-*Remove cleaning, claims, and Event notice from user UI
-*Need to add code for all text areas in the report pane not just the main text area. specifically the on action event for the ENTER key.
+*email functionality to send the customer the report directly from the Application.*
+*Photograph integration, access the camera from the aplication and attach the files along with the report for email to customer.*
+*Fix the wrap text problem for the notes TextArea in the print stage.*
+
